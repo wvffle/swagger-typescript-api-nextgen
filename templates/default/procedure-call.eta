@@ -70,7 +70,11 @@ const describeReturnType = () => {
           return `Promise<AxiosResponse<${type}>>`
         }
         default: {
-          return `Promise<HttpResponse<${type}, ${errorType}>>`
+          if(config.unwrapResponseData) {
+            return `Promise<${type}>`
+          } else {
+            return `Promise<HttpResponse<${type}, ${errorType}>>`
+          }
         }
     }
 }
