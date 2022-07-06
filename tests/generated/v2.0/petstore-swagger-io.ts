@@ -306,7 +306,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/pet/{petId}
      * @secure
      */
-    getPetById: (petId: number, params: RequestParams = {}) =>
+    getPetById: (petId: number, params: RequestParams = {}): Promise<HttpResponse<Pet, void>> =>
       this.request<Pet, void>({
         path: `/pet/${petId}`,
         method: "GET",
@@ -324,7 +324,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/pet/{petId}
      * @secure
      */
-    updatePetWithForm: (petId: number, data: { name?: string; status?: string }, params: RequestParams = {}) =>
+    updatePetWithForm: (
+      petId: number,
+      data: { name?: string; status?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/pet/${petId}`,
         method: "POST",
@@ -343,7 +347,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/pet/{petId}
      * @secure
      */
-    deletePet: (petId: number, params: RequestParams = {}) =>
+    deletePet: (petId: number, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/pet/${petId}`,
         method: "DELETE",
@@ -360,7 +364,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/pet/{petId}/uploadImage
      * @secure
      */
-    uploadFile: (petId: number, data: { additionalMetadata?: string; file?: File }, params: RequestParams = {}) =>
+    uploadFile: (
+      petId: number,
+      data: { additionalMetadata?: string; file?: File },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<ApiResponse, any>> =>
       this.request<ApiResponse, any>({
         path: `/pet/${petId}/uploadImage`,
         method: "POST",
@@ -380,7 +388,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/pet
      * @secure
      */
-    addPet: (body: Pet, params: RequestParams = {}) =>
+    addPet: (body: Pet, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/pet`,
         method: "POST",
@@ -399,7 +407,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/pet
      * @secure
      */
-    updatePet: (body: Pet, params: RequestParams = {}) =>
+    updatePet: (body: Pet, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/pet`,
         method: "PUT",
@@ -418,7 +426,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/pet/findByStatus
      * @secure
      */
-    findPetsByStatus: (query: { status: ("available" | "pending" | "sold")[] }, params: RequestParams = {}) =>
+    findPetsByStatus: (
+      query: { status: ("available" | "pending" | "sold")[] },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Pet[], void>> =>
       this.request<Pet[], void>({
         path: `/pet/findByStatus`,
         method: "GET",
@@ -438,7 +449,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      * @secure
      */
-    findPetsByTags: (query: { tags: string[] }, params: RequestParams = {}) =>
+    findPetsByTags: (query: { tags: string[] }, params: RequestParams = {}): Promise<HttpResponse<Pet[], void>> =>
       this.request<Pet[], void>({
         path: `/pet/findByTags`,
         method: "GET",
@@ -458,7 +469,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/store/inventory
      * @secure
      */
-    getInventory: (params: RequestParams = {}) =>
+    getInventory: (params: RequestParams = {}): Promise<HttpResponse<Record<string, number>, any>> =>
       this.request<Record<string, number>, any>({
         path: `/store/inventory`,
         method: "GET",
@@ -475,7 +486,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Find purchase order by ID
      * @request GET:/store/order/{orderId}
      */
-    getOrderById: (orderId: number, params: RequestParams = {}) =>
+    getOrderById: (orderId: number, params: RequestParams = {}): Promise<HttpResponse<Order, void>> =>
       this.request<Order, void>({
         path: `/store/order/${orderId}`,
         method: "GET",
@@ -491,7 +502,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Delete purchase order by ID
      * @request DELETE:/store/order/{orderId}
      */
-    deleteOrder: (orderId: number, params: RequestParams = {}) =>
+    deleteOrder: (orderId: number, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/store/order/${orderId}`,
         method: "DELETE",
@@ -506,7 +517,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Place an order for a pet
      * @request POST:/store/order
      */
-    placeOrder: (body: Order, params: RequestParams = {}) =>
+    placeOrder: (body: Order, params: RequestParams = {}): Promise<HttpResponse<Order, void>> =>
       this.request<Order, void>({
         path: `/store/order`,
         method: "POST",
@@ -525,7 +536,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get user by user name
      * @request GET:/user/{username}
      */
-    getUserByName: (username: string, params: RequestParams = {}) =>
+    getUserByName: (username: string, params: RequestParams = {}): Promise<HttpResponse<User, void>> =>
       this.request<User, void>({
         path: `/user/${username}`,
         method: "GET",
@@ -541,7 +552,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Updated user
      * @request PUT:/user/{username}
      */
-    updateUser: (username: string, body: User, params: RequestParams = {}) =>
+    updateUser: (username: string, body: User, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/user/${username}`,
         method: "PUT",
@@ -558,7 +569,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Delete user
      * @request DELETE:/user/{username}
      */
-    deleteUser: (username: string, params: RequestParams = {}) =>
+    deleteUser: (username: string, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/user/${username}`,
         method: "DELETE",
@@ -573,7 +584,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Logs user into the system
      * @request GET:/user/login
      */
-    loginUser: (query: { username: string; password: string }, params: RequestParams = {}) =>
+    loginUser: (
+      query: { username: string; password: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/user/login`,
         method: "GET",
@@ -590,7 +604,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Logs out current logged in user session
      * @request GET:/user/logout
      */
-    logoutUser: (params: RequestParams = {}) =>
+    logoutUser: (params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/user/logout`,
         method: "GET",
@@ -605,7 +619,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create user
      * @request POST:/user
      */
-    createUser: (body: User, params: RequestParams = {}) =>
+    createUser: (body: User, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/user`,
         method: "POST",
@@ -622,7 +636,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Creates list of users with given input array
      * @request POST:/user/createWithArray
      */
-    createUsersWithArrayInput: (body: User[], params: RequestParams = {}) =>
+    createUsersWithArrayInput: (body: User[], params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/user/createWithArray`,
         method: "POST",
@@ -639,7 +653,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Creates list of users with given input array
      * @request POST:/user/createWithList
      */
-    createUsersWithListInput: (body: User[], params: RequestParams = {}) =>
+    createUsersWithListInput: (body: User[], params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/user/createWithList`,
         method: "POST",

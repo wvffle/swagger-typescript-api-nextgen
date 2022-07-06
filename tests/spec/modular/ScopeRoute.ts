@@ -8,7 +8,7 @@
  * ------------------------------------------------------------------
  */
 
-import { Claims } from "./data-contracts";
+import type { Claims } from "./data-contracts";
 
 export namespace Scope {
   /**

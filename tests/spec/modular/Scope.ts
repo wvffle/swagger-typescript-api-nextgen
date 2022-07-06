@@ -8,8 +8,9 @@
  * ------------------------------------------------------------------
  */
 
-import { Claims, Error } from "./data-contracts";
-import { ContentType, HttpClient, RequestParams } from "./http-client";
+import type { Claims, Error } from "./data-contracts";
+import type { RequestParams } from "./http-client";
+import { ContentType, HttpClient } from "./http-client";
 
 export class Scope<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**

@@ -299,7 +299,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/trip
      * @secure
      */
-    tripList: (params: RequestParams = {}) =>
+    tripList: (params: RequestParams = {}): Promise<HttpResponse<Trip[], any>> =>
       this.request<Trip[], any>({
         path: `/trip`,
         method: "GET",
@@ -315,7 +315,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/trip/{trip_id}/stop
      * @secure
      */
-    stopDetail: (tripId: string, params: RequestParams = {}) =>
+    stopDetail: (tripId: string, params: RequestParams = {}): Promise<HttpResponse<Step[], any>> =>
       this.request<Step[], any>({
         path: `/trip/${tripId}/stop`,
         method: "GET",

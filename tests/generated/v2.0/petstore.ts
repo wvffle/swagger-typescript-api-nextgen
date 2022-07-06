@@ -247,7 +247,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List all pets
      * @request GET:/pets
      */
-    listPets: (query?: { limit?: number }, params: RequestParams = {}) =>
+    listPets: (query?: { limit?: number }, params: RequestParams = {}): Promise<HttpResponse<Pets, Error>> =>
       this.request<Pets, Error>({
         path: `/pets`,
         method: "GET",
@@ -264,7 +264,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create a pet
      * @request POST:/pets
      */
-    createPets: (params: RequestParams = {}) =>
+    createPets: (params: RequestParams = {}): Promise<HttpResponse<void, Error>> =>
       this.request<void, Error>({
         path: `/pets`,
         method: "POST",
@@ -279,7 +279,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Info for a specific pet
      * @request GET:/pets/{petId}
      */
-    showPetById: (petId: string, params: RequestParams = {}) =>
+    showPetById: (petId: string, params: RequestParams = {}): Promise<HttpResponse<Pets, Error>> =>
       this.request<Pets, Error>({
         path: `/pets/${petId}`,
         method: "GET",

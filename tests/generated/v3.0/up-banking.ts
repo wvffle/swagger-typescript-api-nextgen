@@ -31,17 +31,13 @@ export enum AccountTypeEnum {
  * Provides information about a value of money.
  */
 export interface MoneyObject {
-  /**
-   * The ISO 4217 currency code.
-   *
-   */
+  /** The ISO 4217 currency code. */
   currencyCode: string;
 
   /**
    * The amount of money, formatted as a string in the relevant currency.
    * For example, for an Australian dollar value of $10.56, this field will
    * be `"10.56"`. The currency symbol is not included in the string.
-   *
    */
   value: string;
 
@@ -49,7 +45,6 @@ export interface MoneyObject {
    * The amount of money in the smallest denomination for the currency, as a
    * 64-bit integer.  For example, for an Australian dollar value of $10.56,
    * this field will be `1056`.
-   *
    */
   valueInBaseUnits: number;
 }
@@ -61,10 +56,7 @@ export interface AccountResource {
   /** The type of this resource: `accounts` */
   type: string;
 
-  /**
-   * The unique identifier for this account.
-   *
-   */
+  /** The unique identifier for this account. */
   id: string;
   attributes: { displayName: string; accountType: AccountTypeEnum; balance: MoneyObject; createdAt: string };
   relationships: { transactions: { links?: { related: string } } };
@@ -77,10 +69,7 @@ accounts, which can be scrolled by following the `prev` and `next` links
 if present.
 */
 export interface ListAccountsResponse {
-  /**
-   * The list of accounts returned in this response.
-   *
-   */
+  /** The list of accounts returned in this response. */
   data: AccountResource[];
   links: { prev: string | null; next: string | null };
 }
@@ -89,10 +78,7 @@ export interface ListAccountsResponse {
  * Successful response to get a single account.
  */
 export interface GetAccountResponse {
-  /**
-   * The account returned in this response.
-   *
-   */
+  /** The account returned in this response. */
   data: AccountResource;
 }
 
@@ -106,7 +92,6 @@ export interface CategoryResource {
   /**
    * The unique identifier for this category. This is a human-readable but
    * URL-safe value.
-   *
    */
   id: string;
   attributes: { name: string };
@@ -122,10 +107,7 @@ export interface CategoryResource {
 returned list is not paginated.
 */
 export interface ListCategoriesResponse {
-  /**
-   * The list of categories returned in this response.
-   *
-   */
+  /** The list of categories returned in this response. */
   data: CategoryResource[];
 }
 
@@ -133,10 +115,7 @@ export interface ListCategoriesResponse {
  * Successful response to get a single category and its ancestry.
  */
 export interface GetCategoryResponse {
-  /**
-   * The category returned in this response.
-   *
-   */
+  /** The category returned in this response. */
   data: CategoryResource;
 }
 
@@ -155,7 +134,6 @@ export interface ErrorObject {
    * The HTTP status code associated with this error. This can also be
    * obtained from the response headers. The status indicates the broad type
    * of error according to HTTP semantics.
-   *
    */
   status: string;
 
@@ -163,7 +141,6 @@ export interface ErrorObject {
    * A short description of this error. This should be stable across
    * multiple occurrences of this type of error and typically expands on the
    * reason for the status code.
-   *
    */
   title: string;
 
@@ -171,7 +148,6 @@ export interface ErrorObject {
    * A detailed description of this error. This should be considered unique
    * to individual occurrences of an error and subject to change. It is
    * useful for debugging purposes.
-   *
    */
   detail: string;
 
@@ -179,7 +155,6 @@ export interface ErrorObject {
    * If applicable, location in the request that this error relates to. This
    * may be a parameter in the query string, or a an attribute in the
    * request body.
-   *
    */
   source?: { parameter?: string; pointer?: string };
 }
@@ -188,10 +163,7 @@ export interface ErrorObject {
  * Generic error response that returns one or more errors.
  */
 export interface ErrorResponse {
-  /**
-   * The list of errors returned in this response.
-   *
-   */
+  /** The list of errors returned in this response. */
   errors: ErrorObject[];
 }
 
@@ -202,10 +174,7 @@ export interface TagResource {
   /** The type of this resource: `tags` */
   type: string;
 
-  /**
-   * The label of the tag, which also acts as the tag’s unique identifier.
-   *
-   */
+  /** The label of the tag, which also acts as the tag’s unique identifier. */
   id: string;
   relationships: { transactions: { links?: { related: string } } };
 }
@@ -216,10 +185,7 @@ tags, which can be scrolled by following the `prev` and `next` links if
 present.
 */
 export interface ListTagsResponse {
-  /**
-   * The list of tags returned in this response.
-   *
-   */
+  /** The list of tags returned in this response. */
   data: TagResource[];
   links: { prev: string | null; next: string | null };
 }
@@ -231,10 +197,7 @@ export interface TagInputResourceIdentifier {
   /** The type of this resource: `tags` */
   type: string;
 
-  /**
-   * The label of the tag, which also acts as the tag’s unique identifier.
-   *
-   */
+  /** The label of the tag, which also acts as the tag’s unique identifier. */
   id: string;
 }
 
@@ -242,10 +205,7 @@ export interface TagInputResourceIdentifier {
  * Request to add or remove tags associated with a transaction.
  */
 export interface UpdateTransactionTagsRequest {
-  /**
-   * The tags to add to or remove from the transaction.
-   *
-   */
+  /** The tags to add to or remove from the transaction. */
   data: TagInputResourceIdentifier[];
 }
 
@@ -268,7 +228,6 @@ export interface HoldInfoObject {
   /**
    * The amount of this transaction while in the `HELD` status, in
    * Australian dollars.
-   *
    */
   amount: MoneyObject;
 
@@ -276,7 +235,6 @@ export interface HoldInfoObject {
    * The foreign currency amount of this transaction while in the `HELD`
    * status. This field will be `null` for domestic transactions. The amount
    * was converted to the AUD amount reflected in the `amount` field.
-   *
    */
   foreignAmount: MoneyObject | null;
 }
@@ -289,7 +247,6 @@ export interface RoundUpObject {
   /**
    * The total amount of this Round Up, including any boosts, represented as
    * a negative value.
-   *
    */
   amount: MoneyObject;
 
@@ -297,7 +254,6 @@ export interface RoundUpObject {
    * The portion of the Round Up `amount` owing to boosted Round Ups,
    * represented as a negative value. If no boost was added to the Round Up
    * this field will be `null`.
-   *
    */
   boostPortion: MoneyObject | null;
 }
@@ -307,16 +263,10 @@ export interface RoundUpObject {
 cashback.
 */
 export interface CashbackObject {
-  /**
-   * A brief description of why this cashback was paid.
-   *
-   */
+  /** A brief description of why this cashback was paid. */
   description: string;
 
-  /**
-   * The total amount of cashback paid, represented as a positive value.
-   *
-   */
+  /** The total amount of cashback paid, represented as a positive value. */
   amount: MoneyObject;
 }
 
@@ -324,10 +274,7 @@ export interface TransactionResource {
   /** The type of this resource: `transactions` */
   type: string;
 
-  /**
-   * The unique identifier for this transaction.
-   *
-   */
+  /** The unique identifier for this transaction. */
   id: string;
   attributes: {
     status: TransactionStatusEnum;
@@ -357,10 +304,7 @@ list of transactions, which can be scrolled by following the `prev` and
 `next` links if present.
 */
 export interface ListTransactionsResponse {
-  /**
-   * The list of transactions returned in this response.
-   *
-   */
+  /** The list of transactions returned in this response. */
   data: TransactionResource[];
   links: { prev: string | null; next: string | null };
 }
@@ -369,10 +313,7 @@ export interface ListTransactionsResponse {
  * Successful response to get a single transaction.
  */
 export interface GetTransactionResponse {
-  /**
-   * The transaction returned in this response.
-   *
-   */
+  /** The transaction returned in this response. */
   data: TransactionResource;
 }
 
@@ -383,10 +324,7 @@ export interface WebhookResource {
   /** The type of this resource: `webhooks` */
   type: string;
 
-  /**
-   * The unique identifier for this webhook.
-   *
-   */
+  /** The unique identifier for this webhook. */
   id: string;
   attributes: { url: string; description: string | null; secretKey?: string; createdAt: string };
   relationships: { logs: { links?: { related: string } } };
@@ -399,10 +337,7 @@ webhooks, which can be scrolled by following the `prev` and `next` links
 if present.
 */
 export interface ListWebhooksResponse {
-  /**
-   * The list of webhooks returned in this response.
-   *
-   */
+  /** The list of webhooks returned in this response. */
   data: WebhookResource[];
   links: { prev: string | null; next: string | null };
 }
@@ -419,10 +354,7 @@ export interface WebhookInputResource {
 attribute.
 */
 export interface CreateWebhookRequest {
-  /**
-   * The webhook resource to create.
-   *
-   */
+  /** The webhook resource to create. */
   data: WebhookInputResource;
 }
 
@@ -430,10 +362,7 @@ export interface CreateWebhookRequest {
  * Successful response after creating a webhook.
  */
 export interface CreateWebhookResponse {
-  /**
-   * The webhook that was created.
-   *
-   */
+  /** The webhook that was created. */
   data: WebhookResource;
 }
 
@@ -461,7 +390,6 @@ export interface WebhookEventResource {
   /**
    * The unique identifier for this event. This will remain constant across
    * delivery retries.
-   *
    */
   id: string;
   attributes: { eventType: WebhookEventTypeEnum; createdAt: string };
@@ -475,10 +403,7 @@ export interface WebhookEventResource {
  * Asynchronous callback request used for webhook event delivery.
  */
 export interface WebhookEventCallback {
-  /**
-   * The webhook event data sent to the subscribed webhook.
-   *
-   */
+  /** The webhook event data sent to the subscribed webhook. */
   data: WebhookEventResource;
 }
 
@@ -486,10 +411,7 @@ export interface WebhookEventCallback {
  * Successful response to get a single webhook.
  */
 export interface GetWebhookResponse {
-  /**
-   * The webhook returned in this response.
-   *
-   */
+  /** The webhook returned in this response. */
   data: WebhookResource;
 }
 
@@ -518,10 +440,7 @@ export interface WebhookDeliveryLogResource {
   /** The type of this resource: `webhook-delivery-logs` */
   type: string;
 
-  /**
-   * The unique identifier for this log entry.
-   *
-   */
+  /** The unique identifier for this log entry. */
   id: string;
   attributes: {
     request: { body: string };
@@ -538,10 +457,7 @@ a paginated list of delivery logs, which can be scrolled by following the
 `next` and `prev` links if present.
 */
 export interface ListWebhookDeliveryLogsResponse {
-  /**
-   * The list of delivery logs returned in this response.
-   *
-   */
+  /** The list of delivery logs returned in this response. */
   data: WebhookDeliveryLogResource[];
   links: { prev: string | null; next: string | null };
 }
@@ -776,7 +692,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/accounts
      * @secure
      */
-    accountsList: (query?: { "page[size]"?: number }, params: RequestParams = {}) =>
+    accountsList: (
+      query?: { "page[size]"?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<ListAccountsResponse, any>> =>
       this.request<ListAccountsResponse, any>({
         path: `/accounts`,
         method: "GET",
@@ -795,7 +714,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/accounts/{id}
      * @secure
      */
-    accountsDetail: (id: string, params: RequestParams = {}) =>
+    accountsDetail: (id: string, params: RequestParams = {}): Promise<HttpResponse<GetAccountResponse, any>> =>
       this.request<GetAccountResponse, any>({
         path: `/accounts/${id}`,
         method: "GET",
@@ -824,7 +743,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         "filter[tag]"?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<ListTransactionsResponse, any>> =>
       this.request<ListTransactionsResponse, any>({
         path: `/accounts/${accountId}/transactions`,
         method: "GET",
@@ -844,7 +763,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/categories
      * @secure
      */
-    categoriesList: (query?: { "filter[parent]"?: string }, params: RequestParams = {}) =>
+    categoriesList: (
+      query?: { "filter[parent]"?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<ListCategoriesResponse, any>> =>
       this.request<ListCategoriesResponse, any>({
         path: `/categories`,
         method: "GET",
@@ -863,7 +785,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/categories/{id}
      * @secure
      */
-    categoriesDetail: (id: string, params: RequestParams = {}) =>
+    categoriesDetail: (id: string, params: RequestParams = {}): Promise<HttpResponse<GetCategoryResponse, any>> =>
       this.request<GetCategoryResponse, any>({
         path: `/categories/${id}`,
         method: "GET",
@@ -882,7 +804,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/util/ping
      * @secure
      */
-    pingList: (params: RequestParams = {}) =>
+    pingList: (params: RequestParams = {}): Promise<HttpResponse<PingResponse, ErrorResponse>> =>
       this.request<PingResponse, ErrorResponse>({
         path: `/util/ping`,
         method: "GET",
@@ -901,7 +823,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/tags
      * @secure
      */
-    tagsList: (query?: { "page[size]"?: number }, params: RequestParams = {}) =>
+    tagsList: (
+      query?: { "page[size]"?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<ListTagsResponse, any>> =>
       this.request<ListTagsResponse, any>({
         path: `/tags`,
         method: "GET",
@@ -921,7 +846,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/transactions/{transactionId}/relationships/tags
      * @secure
      */
-    relationshipsTagsCreate: (transactionId: string, data: UpdateTransactionTagsRequest, params: RequestParams = {}) =>
+    relationshipsTagsCreate: (
+      transactionId: string,
+      data: UpdateTransactionTagsRequest,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/transactions/${transactionId}/relationships/tags`,
         method: "POST",
@@ -940,7 +869,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/transactions/{transactionId}/relationships/tags
      * @secure
      */
-    relationshipsTagsDelete: (transactionId: string, data: UpdateTransactionTagsRequest, params: RequestParams = {}) =>
+    relationshipsTagsDelete: (
+      transactionId: string,
+      data: UpdateTransactionTagsRequest,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/transactions/${transactionId}/relationships/tags`,
         method: "DELETE",
@@ -970,7 +903,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         "filter[tag]"?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<ListTransactionsResponse, any>> =>
       this.request<ListTransactionsResponse, any>({
         path: `/transactions`,
         method: "GET",
@@ -989,7 +922,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/transactions/{id}
      * @secure
      */
-    transactionsDetail: (id: string, params: RequestParams = {}) =>
+    transactionsDetail: (id: string, params: RequestParams = {}): Promise<HttpResponse<GetTransactionResponse, any>> =>
       this.request<GetTransactionResponse, any>({
         path: `/transactions/${id}`,
         method: "GET",
@@ -1008,7 +941,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/webhooks
      * @secure
      */
-    webhooksList: (query?: { "page[size]"?: number }, params: RequestParams = {}) =>
+    webhooksList: (
+      query?: { "page[size]"?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<ListWebhooksResponse, any>> =>
       this.request<ListWebhooksResponse, any>({
         path: `/webhooks`,
         method: "GET",
@@ -1027,7 +963,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/webhooks
      * @secure
      */
-    webhooksCreate: (data: CreateWebhookRequest, params: RequestParams = {}) =>
+    webhooksCreate: (
+      data: CreateWebhookRequest,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<CreateWebhookResponse, any>> =>
       this.request<CreateWebhookResponse, any>({
         path: `/webhooks`,
         method: "POST",
@@ -1047,7 +986,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/webhooks/{id}
      * @secure
      */
-    webhooksDetail: (id: string, params: RequestParams = {}) =>
+    webhooksDetail: (id: string, params: RequestParams = {}): Promise<HttpResponse<GetWebhookResponse, any>> =>
       this.request<GetWebhookResponse, any>({
         path: `/webhooks/${id}`,
         method: "GET",
@@ -1065,7 +1004,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/webhooks/{id}
      * @secure
      */
-    webhooksDelete: (id: string, params: RequestParams = {}) =>
+    webhooksDelete: (id: string, params: RequestParams = {}): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/webhooks/${id}`,
         method: "DELETE",
@@ -1082,7 +1021,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/webhooks/{webhookId}/ping
      * @secure
      */
-    pingCreate: (webhookId: string, params: RequestParams = {}) =>
+    pingCreate: (webhookId: string, params: RequestParams = {}): Promise<HttpResponse<WebhookEventCallback, any>> =>
       this.request<WebhookEventCallback, any>({
         path: `/webhooks/${webhookId}/ping`,
         method: "POST",
@@ -1100,7 +1039,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/webhooks/{webhookId}/logs
      * @secure
      */
-    logsDetail: (webhookId: string, query?: { "page[size]"?: number }, params: RequestParams = {}) =>
+    logsDetail: (
+      webhookId: string,
+      query?: { "page[size]"?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<ListWebhookDeliveryLogsResponse, any>> =>
       this.request<ListWebhookDeliveryLogsResponse, any>({
         path: `/webhooks/${webhookId}/logs`,
         method: "GET",

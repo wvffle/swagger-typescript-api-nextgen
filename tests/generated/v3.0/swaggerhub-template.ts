@@ -233,7 +233,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/example
      * @secure
      */
-    exampleList: (params: RequestParams = {}) =>
+    exampleList: (params: RequestParams = {}): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/example`,
         method: "GET",
@@ -250,7 +250,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/ping
      * @secure
      */
-    pingList: (params: RequestParams = {}) =>
+    pingList: (params: RequestParams = {}): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/ping`,
         method: "GET",

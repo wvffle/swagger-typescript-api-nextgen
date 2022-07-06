@@ -509,7 +509,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/user
      * @secure
      */
-    currentUser: (params: RequestParams = {}) =>
+    currentUser: (params: RequestParams = {}): Promise<HttpResponse<User, void>> =>
       this.request<User, void>({
         path: `/user`,
         method: "GET",
@@ -528,7 +528,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/webhooks/feed/:token
      * @secure
      */
-    createWebhookFeedData: (token: string, payload: { value?: string }, params: RequestParams = {}) =>
+    createWebhookFeedData: (
+      token: string,
+      payload: { value?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Data, void>> =>
       this.request<Data, void>({
         path: `/webhooks/feed/${token}`,
         method: "POST",
@@ -548,7 +552,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/webhooks/feed/:token/raw
      * @secure
      */
-    createRawWebhookFeedData: (token: string, params: RequestParams = {}) =>
+    createRawWebhookFeedData: (token: string, params: RequestParams = {}): Promise<HttpResponse<Data, void>> =>
       this.request<Data, void>({
         path: `/webhooks/feed/${token}/raw`,
         method: "POST",
@@ -568,7 +572,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/activities
      * @secure
      */
-    destroyActivities: (username: string, params: RequestParams = {}) =>
+    destroyActivities: (username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/${username}/activities`,
         method: "DELETE",
@@ -589,7 +593,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       username: string,
       query?: { start_time?: string; end_time?: string; limit?: number },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Activity[], void>> =>
       this.request<Activity[], void>({
         path: `/${username}/activities`,
         method: "GET",
@@ -613,7 +617,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       type: string,
       query?: { start_time?: string; end_time?: string; limit?: number },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Activity[], void>> =>
       this.request<Activity[], void>({
         path: `/${username}/activities/${type}`,
         method: "GET",
@@ -632,7 +636,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/dashboards
      * @secure
      */
-    allDashboards: (username: string, params: RequestParams = {}) =>
+    allDashboards: (username: string, params: RequestParams = {}): Promise<HttpResponse<Dashboard[], void>> =>
       this.request<Dashboard[], void>({
         path: `/${username}/dashboards`,
         method: "GET",
@@ -650,7 +654,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/dashboards
      * @secure
      */
-    createDashboard: (username: string, dashboard: Dashboard, params: RequestParams = {}) =>
+    createDashboard: (
+      username: string,
+      dashboard: Dashboard,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Dashboard, void>> =>
       this.request<Dashboard, void>({
         path: `/${username}/dashboards`,
         method: "POST",
@@ -670,7 +678,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/dashboards/{dashboard_id}/blocks
      * @secure
      */
-    allBlocks: (username: string, dashboardId: string, params: RequestParams = {}) =>
+    allBlocks: (
+      username: string,
+      dashboardId: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Block[], void>> =>
       this.request<Block[], void>({
         path: `/${username}/dashboards/${dashboardId}/blocks`,
         method: "GET",
@@ -688,7 +700,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/dashboards/{dashboard_id}/blocks
      * @secure
      */
-    createBlock: (username: string, dashboardId: string, block: Block, params: RequestParams = {}) =>
+    createBlock: (
+      username: string,
+      dashboardId: string,
+      block: Block,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Block, void>> =>
       this.request<Block, void>({
         path: `/${username}/dashboards/${dashboardId}/blocks`,
         method: "POST",
@@ -708,7 +725,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/dashboards/{dashboard_id}/blocks/{id}
      * @secure
      */
-    destroyBlock: (username: string, dashboardId: string, id: string, params: RequestParams = {}) =>
+    destroyBlock: (
+      username: string,
+      dashboardId: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/dashboards/${dashboardId}/blocks/${id}`,
         method: "DELETE",
@@ -726,7 +748,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/dashboards/{dashboard_id}/blocks/{id}
      * @secure
      */
-    getBlock: (username: string, dashboardId: string, id: string, params: RequestParams = {}) =>
+    getBlock: (
+      username: string,
+      dashboardId: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Block, void>> =>
       this.request<Block, void>({
         path: `/${username}/dashboards/${dashboardId}/blocks/${id}`,
         method: "GET",
@@ -762,7 +789,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         visual_type?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Block, void>> =>
       this.request<Block, void>({
         path: `/${username}/dashboards/${dashboardId}/blocks/${id}`,
         method: "PATCH",
@@ -800,7 +827,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         visual_type?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Block, void>> =>
       this.request<Block, void>({
         path: `/${username}/dashboards/${dashboardId}/blocks/${id}`,
         method: "PUT",
@@ -820,7 +847,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/dashboards/{id}
      * @secure
      */
-    destroyDashboard: (username: string, id: string, params: RequestParams = {}) =>
+    destroyDashboard: (username: string, id: string, params: RequestParams = {}): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/dashboards/${id}`,
         method: "DELETE",
@@ -838,7 +865,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/dashboards/{id}
      * @secure
      */
-    getDashboard: (username: string, id: string, params: RequestParams = {}) =>
+    getDashboard: (username: string, id: string, params: RequestParams = {}): Promise<HttpResponse<Dashboard, void>> =>
       this.request<Dashboard, void>({
         path: `/${username}/dashboards/${id}`,
         method: "GET",
@@ -861,7 +888,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       dashboard: { description?: string; key?: string; name?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Dashboard, void>> =>
       this.request<Dashboard, void>({
         path: `/${username}/dashboards/${id}`,
         method: "PATCH",
@@ -886,7 +913,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       dashboard: { description?: string; key?: string; name?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Dashboard, void>> =>
       this.request<Dashboard, void>({
         path: `/${username}/dashboards/${id}`,
         method: "PUT",
@@ -906,7 +933,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds
      * @secure
      */
-    allFeeds: (username: string, params: RequestParams = {}) =>
+    allFeeds: (username: string, params: RequestParams = {}): Promise<HttpResponse<Feed[], void>> =>
       this.request<Feed[], void>({
         path: `/${username}/feeds`,
         method: "GET",
@@ -924,7 +951,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/feeds
      * @secure
      */
-    createFeed: (username: string, feed: Feed, query?: { group_key?: string }, params: RequestParams = {}) =>
+    createFeed: (
+      username: string,
+      feed: Feed,
+      query?: { group_key?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Feed, void>> =>
       this.request<Feed, void>({
         path: `/${username}/feeds`,
         method: "POST",
@@ -945,7 +977,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/feeds/{feed_key}
      * @secure
      */
-    destroyFeed: (username: string, feedKey: string, params: RequestParams = {}) =>
+    destroyFeed: (username: string, feedKey: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/${username}/feeds/${feedKey}`,
         method: "DELETE",
@@ -962,7 +994,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds/{feed_key}
      * @secure
      */
-    getFeed: (username: string, feedKey: string, params: RequestParams = {}) =>
+    getFeed: (username: string, feedKey: string, params: RequestParams = {}): Promise<HttpResponse<Feed, void>> =>
       this.request<Feed, void>({
         path: `/${username}/feeds/${feedKey}`,
         method: "GET",
@@ -985,7 +1017,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       feed: { description?: string; key?: string; license?: string; name?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Feed, void>> =>
       this.request<Feed, void>({
         path: `/${username}/feeds/${feedKey}`,
         method: "PATCH",
@@ -1010,7 +1042,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       feed: { description?: string; key?: string; license?: string; name?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Feed, void>> =>
       this.request<Feed, void>({
         path: `/${username}/feeds/${feedKey}`,
         method: "PUT",
@@ -1035,7 +1067,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       query?: { start_time?: string; end_time?: string; limit?: number; include?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse[], void>> =>
       this.request<DataResponse[], void>({
         path: `/${username}/feeds/${feedKey}/data`,
         method: "GET",
@@ -1059,7 +1091,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       datum: { created_at?: string; ele?: string; epoch?: number; lat?: string; lon?: string; value?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Data, void>> =>
       this.request<Data, void>({
         path: `/${username}/feeds/${feedKey}/data`,
         method: "POST",
@@ -1079,7 +1111,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/feeds/{feed_key}/data/batch
      * @secure
      */
-    batchCreateData: (username: string, feedKey: string, data: Data, params: RequestParams = {}) =>
+    batchCreateData: (
+      username: string,
+      feedKey: string,
+      data: Data,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<DataResponse[], void>> =>
       this.request<DataResponse[], void>({
         path: `/${username}/feeds/${feedKey}/data/batch`,
         method: "POST",
@@ -1104,7 +1141,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       query?: { start_time?: string; end_time?: string; resolution?: number; hours?: number },
       params: RequestParams = {},
-    ) =>
+    ): Promise<
+      HttpResponse<
+        {
+          columns?: string[];
+          data?: string[][];
+          feed?: { id?: number; key?: string; name?: string };
+          parameters?: object;
+        },
+        void
+      >
+    > =>
       this.request<
         {
           columns?: string[];
@@ -1131,7 +1178,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds/{feed_key}/data/first
      * @secure
      */
-    firstData: (username: string, feedKey: string, query?: { include?: string }, params: RequestParams = {}) =>
+    firstData: (
+      username: string,
+      feedKey: string,
+      query?: { include?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/feeds/${feedKey}/data/first`,
         method: "GET",
@@ -1151,7 +1203,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds/{feed_key}/data/last
      * @secure
      */
-    lastData: (username: string, feedKey: string, query?: { include?: string }, params: RequestParams = {}) =>
+    lastData: (
+      username: string,
+      feedKey: string,
+      query?: { include?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/feeds/${feedKey}/data/last`,
         method: "GET",
@@ -1171,7 +1228,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds/{feed_key}/data/next
      * @secure
      */
-    nextData: (username: string, feedKey: string, query?: { include?: string }, params: RequestParams = {}) =>
+    nextData: (
+      username: string,
+      feedKey: string,
+      query?: { include?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/feeds/${feedKey}/data/next`,
         method: "GET",
@@ -1191,7 +1253,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds/{feed_key}/data/previous
      * @secure
      */
-    previousData: (username: string, feedKey: string, query?: { include?: string }, params: RequestParams = {}) =>
+    previousData: (
+      username: string,
+      feedKey: string,
+      query?: { include?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/feeds/${feedKey}/data/previous`,
         method: "GET",
@@ -1211,7 +1278,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds/{feed_key}/data/retain
      * @secure
      */
-    retainData: (username: string, feedKey: string, params: RequestParams = {}) =>
+    retainData: (username: string, feedKey: string, params: RequestParams = {}): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/feeds/${feedKey}/data/retain`,
         method: "GET",
@@ -1229,7 +1296,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/feeds/{feed_key}/data/{id}
      * @secure
      */
-    destroyData: (username: string, feedKey: string, id: string, params: RequestParams = {}) =>
+    destroyData: (
+      username: string,
+      feedKey: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/feeds/${feedKey}/data/${id}`,
         method: "DELETE",
@@ -1253,7 +1325,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       query?: { include?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/feeds/${feedKey}/data/${id}`,
         method: "GET",
@@ -1278,7 +1350,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       datum: { created_at?: string; ele?: string; epoch?: number; lat?: string; lon?: string; value?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/feeds/${feedKey}/data/${id}`,
         method: "PATCH",
@@ -1304,7 +1376,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       datum: { created_at?: string; ele?: string; epoch?: number; lat?: string; lon?: string; value?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/feeds/${feedKey}/data/${id}`,
         method: "PUT",
@@ -1324,7 +1396,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/feeds/{feed_key}/details
      * @secure
      */
-    getFeedDetails: (username: string, feedKey: string, params: RequestParams = {}) =>
+    getFeedDetails: (
+      username: string,
+      feedKey: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Feed, void>> =>
       this.request<Feed, void>({
         path: `/${username}/feeds/${feedKey}/details`,
         method: "GET",
@@ -1342,7 +1418,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/groups
      * @secure
      */
-    allGroups: (username: string, params: RequestParams = {}) =>
+    allGroups: (username: string, params: RequestParams = {}): Promise<HttpResponse<Group[], void>> =>
       this.request<Group[], void>({
         path: `/${username}/groups`,
         method: "GET",
@@ -1360,7 +1436,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/groups
      * @secure
      */
-    createGroup: (username: string, group: Group, params: RequestParams = {}) =>
+    createGroup: (username: string, group: Group, params: RequestParams = {}): Promise<HttpResponse<Group, void>> =>
       this.request<Group, void>({
         path: `/${username}/groups`,
         method: "POST",
@@ -1380,7 +1456,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/groups/{group_key}
      * @secure
      */
-    destroyGroup: (username: string, groupKey: string, params: RequestParams = {}) =>
+    destroyGroup: (
+      username: string,
+      groupKey: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/groups/${groupKey}`,
         method: "DELETE",
@@ -1398,7 +1478,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/groups/{group_key}
      * @secure
      */
-    getGroup: (username: string, groupKey: string, params: RequestParams = {}) =>
+    getGroup: (username: string, groupKey: string, params: RequestParams = {}): Promise<HttpResponse<Group, void>> =>
       this.request<Group, void>({
         path: `/${username}/groups/${groupKey}`,
         method: "GET",
@@ -1421,7 +1501,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       groupKey: string,
       group: { description?: string; key?: string; name?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Group, void>> =>
       this.request<Group, void>({
         path: `/${username}/groups/${groupKey}`,
         method: "PATCH",
@@ -1446,7 +1526,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       groupKey: string,
       group: { description?: string; key?: string; name?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Group, void>> =>
       this.request<Group, void>({
         path: `/${username}/groups/${groupKey}`,
         method: "PUT",
@@ -1466,7 +1546,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/groups/{group_key}/add
      * @secure
      */
-    addFeedToGroup: (groupKey: string, username: string, query?: { feed_key?: string }, params: RequestParams = {}) =>
+    addFeedToGroup: (
+      groupKey: string,
+      username: string,
+      query?: { feed_key?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Group, void>> =>
       this.request<Group, void>({
         path: `/${username}/groups/${groupKey}/add`,
         method: "POST",
@@ -1494,7 +1579,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         location?: { ele?: number; lat: number; lon: number };
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse[], void>> =>
       this.request<DataResponse[], void>({
         path: `/${username}/groups/${groupKey}/data`,
         method: "POST",
@@ -1514,7 +1599,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/groups/{group_key}/feeds
      * @secure
      */
-    allGroupFeeds: (groupKey: string, username: string, params: RequestParams = {}) =>
+    allGroupFeeds: (
+      groupKey: string,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Feed[], void>> =>
       this.request<Feed[], void>({
         path: `/${username}/groups/${groupKey}/feeds`,
         method: "GET",
@@ -1537,7 +1626,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       groupKey: string,
       feed: { description?: string; key?: string; license?: string; name?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Feed, void>> =>
       this.request<Feed, void>({
         path: `/${username}/groups/${groupKey}/feeds`,
         method: "POST",
@@ -1563,7 +1652,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       query?: { start_time?: string; end_time?: string; limit?: number },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse[], void>> =>
       this.request<DataResponse[], void>({
         path: `/${username}/groups/${groupKey}/feeds/${feedKey}/data`,
         method: "GET",
@@ -1588,7 +1677,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       datum: { created_at?: string; ele?: string; epoch?: number; lat?: string; lon?: string; value?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse, void>> =>
       this.request<DataResponse, void>({
         path: `/${username}/groups/${groupKey}/feeds/${feedKey}/data`,
         method: "POST",
@@ -1614,7 +1703,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       feedKey: string,
       data: { created_at?: string; ele?: string; epoch?: number; lat?: string; lon?: string; value?: string }[],
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<DataResponse[], void>> =>
       this.request<DataResponse[], void>({
         path: `/${username}/groups/${groupKey}/feeds/${feedKey}/data/batch`,
         method: "POST",
@@ -1639,7 +1728,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       username: string,
       query?: { feed_key?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Group, void>> =>
       this.request<Group, void>({
         path: `/${username}/groups/${groupKey}/remove`,
         method: "POST",
@@ -1658,7 +1747,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/throttle
      * @secure
      */
-    getCurrentUserThrottle: (username: string, params: RequestParams = {}) =>
+    getCurrentUserThrottle: (
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ active_data_rate?: number; data_rate_limit?: number }, void>> =>
       this.request<{ active_data_rate?: number; data_rate_limit?: number }, void>({
         path: `/${username}/throttle`,
         method: "GET",
@@ -1676,7 +1768,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/tokens
      * @secure
      */
-    allTokens: (username: string, params: RequestParams = {}) =>
+    allTokens: (username: string, params: RequestParams = {}): Promise<HttpResponse<Token[], void>> =>
       this.request<Token[], void>({
         path: `/${username}/tokens`,
         method: "GET",
@@ -1694,7 +1786,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/tokens
      * @secure
      */
-    createToken: (username: string, token: Token, params: RequestParams = {}) =>
+    createToken: (username: string, token: Token, params: RequestParams = {}): Promise<HttpResponse<Token, void>> =>
       this.request<Token, void>({
         path: `/${username}/tokens`,
         method: "POST",
@@ -1714,7 +1806,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/tokens/{id}
      * @secure
      */
-    destroyToken: (username: string, id: string, params: RequestParams = {}) =>
+    destroyToken: (username: string, id: string, params: RequestParams = {}): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/tokens/${id}`,
         method: "DELETE",
@@ -1732,7 +1824,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/tokens/{id}
      * @secure
      */
-    getToken: (username: string, id: string, params: RequestParams = {}) =>
+    getToken: (username: string, id: string, params: RequestParams = {}): Promise<HttpResponse<Token, void>> =>
       this.request<Token, void>({
         path: `/${username}/tokens/${id}`,
         method: "GET",
@@ -1750,7 +1842,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/{username}/tokens/{id}
      * @secure
      */
-    updateToken: (username: string, id: string, token: { token?: string }, params: RequestParams = {}) =>
+    updateToken: (
+      username: string,
+      id: string,
+      token: { token?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Token, void>> =>
       this.request<Token, void>({
         path: `/${username}/tokens/${id}`,
         method: "PATCH",
@@ -1770,7 +1867,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/{username}/tokens/{id}
      * @secure
      */
-    replaceToken: (username: string, id: string, token: { token?: string }, params: RequestParams = {}) =>
+    replaceToken: (
+      username: string,
+      id: string,
+      token: { token?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Token, void>> =>
       this.request<Token, void>({
         path: `/${username}/tokens/${id}`,
         method: "PUT",
@@ -1790,7 +1892,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/triggers
      * @secure
      */
-    allTriggers: (username: string, params: RequestParams = {}) =>
+    allTriggers: (username: string, params: RequestParams = {}): Promise<HttpResponse<Trigger[], void>> =>
       this.request<Trigger[], void>({
         path: `/${username}/triggers`,
         method: "GET",
@@ -1808,7 +1910,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/{username}/triggers
      * @secure
      */
-    createTrigger: (username: string, trigger: Trigger, params: RequestParams = {}) =>
+    createTrigger: (
+      username: string,
+      trigger: Trigger,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Trigger, void>> =>
       this.request<Trigger, void>({
         path: `/${username}/triggers`,
         method: "POST",
@@ -1828,7 +1934,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/triggers/{id}
      * @secure
      */
-    destroyTrigger: (username: string, id: string, params: RequestParams = {}) =>
+    destroyTrigger: (username: string, id: string, params: RequestParams = {}): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/triggers/${id}`,
         method: "DELETE",
@@ -1846,7 +1952,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/triggers/{id}
      * @secure
      */
-    getTrigger: (username: string, id: string, params: RequestParams = {}) =>
+    getTrigger: (username: string, id: string, params: RequestParams = {}): Promise<HttpResponse<Trigger, void>> =>
       this.request<Trigger, void>({
         path: `/${username}/triggers/${id}`,
         method: "GET",
@@ -1864,7 +1970,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/{username}/triggers/{id}
      * @secure
      */
-    updateTrigger: (username: string, id: string, trigger: { name?: string }, params: RequestParams = {}) =>
+    updateTrigger: (
+      username: string,
+      id: string,
+      trigger: { name?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Trigger, void>> =>
       this.request<Trigger, void>({
         path: `/${username}/triggers/${id}`,
         method: "PATCH",
@@ -1884,7 +1995,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/{username}/triggers/{id}
      * @secure
      */
-    replaceTrigger: (username: string, id: string, trigger: { name?: string }, params: RequestParams = {}) =>
+    replaceTrigger: (
+      username: string,
+      id: string,
+      trigger: { name?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Trigger, void>> =>
       this.request<Trigger, void>({
         path: `/${username}/triggers/${id}`,
         method: "PUT",
@@ -1904,7 +2020,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/{type}/{type_id}/acl
      * @secure
      */
-    allPermissions: (username: string, type: string, typeId: string, params: RequestParams = {}) =>
+    allPermissions: (
+      username: string,
+      type: string,
+      typeId: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Permission[], void>> =>
       this.request<Permission[], void>({
         path: `/${username}/${type}/${typeId}/acl`,
         method: "GET",
@@ -1928,7 +2049,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       typeId: string,
       permission: Permission,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Permission, void>> =>
       this.request<Permission, void>({
         path: `/${username}/${type}/${typeId}/acl`,
         method: "POST",
@@ -1948,7 +2069,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/{username}/{type}/{type_id}/acl/{id}
      * @secure
      */
-    destroyPermission: (username: string, type: string, typeId: string, id: string, params: RequestParams = {}) =>
+    destroyPermission: (
+      username: string,
+      type: string,
+      typeId: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<string, void>> =>
       this.request<string, void>({
         path: `/${username}/${type}/${typeId}/acl/${id}`,
         method: "DELETE",
@@ -1966,7 +2093,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/{username}/{type}/{type_id}/acl/{id}
      * @secure
      */
-    getPermission: (username: string, type: string, typeId: string, id: string, params: RequestParams = {}) =>
+    getPermission: (
+      username: string,
+      type: string,
+      typeId: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Permission, void>> =>
       this.request<Permission, void>({
         path: `/${username}/${type}/${typeId}/acl/${id}`,
         method: "GET",
@@ -1995,7 +2128,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         scope_value?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Permission, void>> =>
       this.request<Permission, void>({
         path: `/${username}/${type}/${typeId}/acl/${id}`,
         method: "PATCH",
@@ -2026,7 +2159,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         scope_value?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Permission, void>> =>
       this.request<Permission, void>({
         path: `/${username}/${type}/${typeId}/acl/${id}`,
         method: "PUT",

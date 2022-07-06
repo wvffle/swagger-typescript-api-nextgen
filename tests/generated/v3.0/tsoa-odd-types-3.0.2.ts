@@ -350,7 +350,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name Login
      * @request POST:/auth
      */
-    login: (data?: AuthUser, params: RequestParams = {}) =>
+    login: (data?: AuthUser, params: RequestParams = {}): Promise<HttpResponse<string, any>> =>
       this.request<string, any>({
         path: `/auth`,
         method: "POST",
@@ -368,7 +368,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/auth/refresh
      * @secure
      */
-    refresh: (params: RequestParams = {}) =>
+    refresh: (params: RequestParams = {}): Promise<HttpResponse<string, any>> =>
       this.request<string, any>({
         path: `/auth/refresh`,
         method: "POST",
@@ -386,7 +386,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/jobs
      * @secure
      */
-    getJobs: (params: RequestParams = {}) =>
+    getJobs: (params: RequestParams = {}): Promise<HttpResponse<Job[], any>> =>
       this.request<Job[], any>({
         path: `/jobs`,
         method: "GET",
@@ -403,7 +403,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/jobs
      * @secure
      */
-    addJob: (data: PickJobGithub, params: RequestParams = {}) =>
+    addJob: (data: PickJobGithub, params: RequestParams = {}): Promise<HttpResponse<string, any>> =>
       this.request<string, any>({
         path: `/jobs`,
         method: "POST",
@@ -422,7 +422,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/jobs/{id}
      * @secure
      */
-    getJob: (id: string, params: RequestParams = {}) =>
+    getJob: (id: string, params: RequestParams = {}): Promise<HttpResponse<Job, void>> =>
       this.request<Job, void>({
         path: `/jobs/${id}`,
         method: "GET",
@@ -439,7 +439,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/jobs/{id}
      * @secure
      */
-    updateJob: (id: string, data: JobUpdate, params: RequestParams = {}) =>
+    updateJob: (id: string, data: JobUpdate, params: RequestParams = {}): Promise<HttpResponse<UpdatedJob, any>> =>
       this.request<UpdatedJob, any>({
         path: `/jobs/${id}`,
         method: "PATCH",
@@ -458,7 +458,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/jobs/{id}
      * @secure
      */
-    deleteJob: (id: string, params: RequestParams = {}) =>
+    deleteJob: (id: string, params: RequestParams = {}): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/jobs/${id}`,
         method: "DELETE",
@@ -475,7 +475,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GetProjects
      * @request GET:/projects
      */
-    getProjects: (params: RequestParams = {}) =>
+    getProjects: (params: RequestParams = {}): Promise<HttpResponse<Project[], any>> =>
       this.request<Project[], any>({
         path: `/projects`,
         method: "GET",
@@ -491,7 +491,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/projects
      * @secure
      */
-    addProjects: (data: ProjectUpdate, params: RequestParams = {}) =>
+    addProjects: (data: ProjectUpdate, params: RequestParams = {}): Promise<HttpResponse<string, any>> =>
       this.request<string, any>({
         path: `/projects`,
         method: "POST",
@@ -510,7 +510,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/projects/{id}
      * @secure
      */
-    updateProject: (id: string, data: ProjectUpdate, params: RequestParams = {}) =>
+    updateProject: (
+      id: string,
+      data: ProjectUpdate,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<UpdatedProject, any>> =>
       this.request<UpdatedProject, any>({
         path: `/projects/${id}`,
         method: "PATCH",
@@ -530,7 +534,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users
      * @secure
      */
-    getUsers: (params: RequestParams = {}) =>
+    getUsers: (params: RequestParams = {}): Promise<HttpResponse<User[], any>> =>
       this.request<User[], any>({
         path: `/users`,
         method: "GET",
@@ -547,7 +551,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/users
      * @secure
      */
-    addUser: (data: AuthUser, params: RequestParams = {}) =>
+    addUser: (data: AuthUser, params: RequestParams = {}): Promise<HttpResponse<User, any>> =>
       this.request<User, any>({
         path: `/users`,
         method: "POST",
@@ -566,7 +570,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/users/{id}
      * @secure
      */
-    deleteUser: (id: string, params: RequestParams = {}) =>
+    deleteUser: (id: string, params: RequestParams = {}): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/users/${id}`,
         method: "DELETE",
@@ -583,7 +587,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/users/{id}
      * @secure
      */
-    updateUser: (id: string, data: UserUpdate, params: RequestParams = {}) =>
+    updateUser: (id: string, data: UserUpdate, params: RequestParams = {}): Promise<HttpResponse<User, any>> =>
       this.request<User, any>({
         path: `/users/${id}`,
         method: "PATCH",

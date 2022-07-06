@@ -252,7 +252,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GetUserByName
      * @request GET:/2.0/users/{username}
      */
-    getUserByName: (username: string, params: RequestParams = {}) =>
+    getUserByName: (username: string, params: RequestParams = {}): Promise<HttpResponse<any, any>> =>
       this.request<any, any>({
         path: `/2.0/users/${username}`,
         method: "GET",
@@ -266,7 +266,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GetRepositoriesByOwner
      * @request GET:/2.0/repositories/{username}
      */
-    getRepositoriesByOwner: (username: string, params: RequestParams = {}) =>
+    getRepositoriesByOwner: (username: string, params: RequestParams = {}): Promise<HttpResponse<any[], any>> =>
       this.request<any[], any>({
         path: `/2.0/repositories/${username}`,
         method: "GET",
@@ -280,7 +280,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GetRepository
      * @request GET:/2.0/repositories/{username}/{slug}
      */
-    getRepository: (username: string, slug: string, params: RequestParams = {}) =>
+    getRepository: (username: string, slug: string, params: RequestParams = {}): Promise<HttpResponse<any, any>> =>
       this.request<any, any>({
         path: `/2.0/repositories/${username}/${slug}`,
         method: "GET",
@@ -299,7 +299,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       slug: string,
       query?: { state?: "open" | "merged" | "declined" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<any[], any>> =>
       this.request<any[], any>({
         path: `/2.0/repositories/${username}/${slug}/pullrequests`,
         method: "GET",
@@ -314,7 +314,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GetPullRequestsById
      * @request GET:/2.0/repositories/{username}/{slug}/pullrequests/{pid}
      */
-    getPullRequestsById: (username: string, slug: string, pid: string, params: RequestParams = {}) =>
+    getPullRequestsById: (
+      username: string,
+      slug: string,
+      pid: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Type404, any>> =>
       this.request<Type404, any>({
         path: `/2.0/repositories/${username}/${slug}/pullrequests/${pid}`,
         method: "GET",
@@ -328,7 +333,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name MergePullRequest
      * @request POST:/2.0/repositories/{username}/{slug}/pullrequests/{pid}/merge
      */
-    mergePullRequest: (username: string, slug: string, pid: string, params: RequestParams = {}) =>
+    mergePullRequest: (
+      username: string,
+      slug: string,
+      pid: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/2.0/repositories/${username}/${slug}/pullrequests/${pid}/merge`,
         method: "POST",

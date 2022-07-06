@@ -257,7 +257,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FindPets
      * @request GET:/pets
      */
-    findPets: (query?: { tags?: string[]; limit?: number }, params: RequestParams = {}) =>
+    findPets: (
+      query?: { tags?: string[]; limit?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Pet[], ErrorModel>> =>
       this.request<Pet[], ErrorModel>({
         path: `/pets`,
         method: "GET",
@@ -272,7 +275,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name AddPet
      * @request POST:/pets
      */
-    addPet: (pet: NewPet, params: RequestParams = {}) =>
+    addPet: (pet: NewPet, params: RequestParams = {}): Promise<HttpResponse<Pet, ErrorModel>> =>
       this.request<Pet, ErrorModel>({
         path: `/pets`,
         method: "POST",
@@ -288,7 +291,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FindPetById
      * @request GET:/pets/{id}
      */
-    findPetById: (id: number, params: RequestParams = {}) =>
+    findPetById: (id: number, params: RequestParams = {}): Promise<HttpResponse<Pet, ErrorModel>> =>
       this.request<Pet, ErrorModel>({
         path: `/pets/${id}`,
         method: "GET",
@@ -302,7 +305,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name DeletePet
      * @request DELETE:/pets/{id}
      */
-    deletePet: (id: number, params: RequestParams = {}) =>
+    deletePet: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, ErrorModel>> =>
       this.request<void, ErrorModel>({
         path: `/pets/${id}`,
         method: "DELETE",

@@ -230,7 +230,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GetData
      * @request GET:/api
      */
-    getData: (params: RequestParams = {}) =>
+    getData: (params: RequestParams = {}): Promise<HttpResponse<{ data?: string }, any>> =>
       this.request<{ data?: string }, any>({
         path: `/api`,
         method: "GET",

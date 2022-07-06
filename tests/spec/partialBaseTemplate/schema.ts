@@ -246,7 +246,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PetsList
      * @request GET:/pets
      */
-    petsList: (params: RequestParams = {}) =>
+    petsList: (params: RequestParams = {}): Promise<HttpResponse<Pet[], any>> =>
       this.request<Pet[], any>({
         path: `/pets`,
         method: "GET",

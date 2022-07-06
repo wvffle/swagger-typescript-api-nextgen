@@ -241,7 +241,10 @@ export class Api<SecurityDataType extends unknown> {
      * @name KeyRegister
      * @request POST:/key
      */
-    keyRegister: (body: any, params: RequestParams = {}) =>
+    keyRegister: (
+      body: any,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ secret?: string; status?: string }, any>> =>
       this.http.request<{ secret?: string; status?: string }, any>({
         path: `/key`,
         method: "POST",

@@ -234,7 +234,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FindPets
      * @request GET:/pets
      */
-    findPets: (query?: { tags?: string[]; limit?: number }, params: RequestParams = {}) =>
+    findPets: (
+      query?: { tags?: string[]; limit?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<unknown, unknown>> =>
       this.request<unknown, unknown>({
         path: `/pets`,
         method: "GET",

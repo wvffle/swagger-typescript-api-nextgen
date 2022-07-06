@@ -329,7 +329,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/products
      * @secure
      */
-    productsList: (query: { latitude: number; longitude: number }, params: RequestParams = {}) =>
+    productsList: (
+      query: { latitude: number; longitude: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Product[], Error>> =>
       this.request<Product[], Error>({
         path: `/products`,
         method: "GET",
@@ -351,7 +354,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     priceList: (
       query: { start_latitude: number; start_longitude: number; end_latitude?: number; end_longitude: number },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<PriceEstimate[], Error>> =>
       this.request<PriceEstimate[], Error>({
         path: `/estimates/price`,
         method: "GET",
@@ -371,7 +374,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     timeList: (
       query: { start_latitude: number; start_longitude: number; customer_uuid?: string; product_id?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Product[], Error>> =>
       this.request<Product[], Error>({
         path: `/estimates/time`,
         method: "GET",
@@ -389,7 +392,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary User Profile
      * @request GET:/me
      */
-    getMe: (params: RequestParams = {}) =>
+    getMe: (params: RequestParams = {}): Promise<HttpResponse<Profile, Error>> =>
       this.request<Profile, Error>({
         path: `/me`,
         method: "GET",
@@ -406,7 +409,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary User Activity
      * @request GET:/history
      */
-    historyList: (query?: { offset?: number; limit?: number }, params: RequestParams = {}) =>
+    historyList: (
+      query?: { offset?: number; limit?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Activities, Error>> =>
       this.request<Activities, Error>({
         path: `/history`,
         method: "GET",

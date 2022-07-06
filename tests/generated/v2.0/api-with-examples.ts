@@ -228,7 +228,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @summary List API versions
    * @request GET:/
    */
-  listVersionsv2 = (params: RequestParams = {}) =>
+  listVersionsv2 = (params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
     this.request<void, void>({
       path: `/`,
       method: "GET",
@@ -244,7 +244,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Show API version details
      * @request GET:/v2
      */
-    getVersionDetailsv2: (params: RequestParams = {}) =>
+    getVersionDetailsv2: (params: RequestParams = {}): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/v2`,
         method: "GET",

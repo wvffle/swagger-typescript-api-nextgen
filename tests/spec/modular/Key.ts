@@ -8,8 +8,9 @@
  * ------------------------------------------------------------------
  */
 
-import { AuthentiqID, Error } from "./data-contracts";
-import { HttpClient, RequestParams } from "./http-client";
+import type { AuthentiqID, Error } from "./data-contracts";
+import type { RequestParams } from "./http-client";
+import { HttpClient } from "./http-client";
 
 export class Key<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**

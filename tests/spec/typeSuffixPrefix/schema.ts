@@ -1679,7 +1679,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/some-test
      * @response `200` `{ user: { foo: number, extra: { id: number, extra: { foo: string, bar: number, baz: string, bad: number, extra: { foo: string, bar: number, baz: string, bad: number, extra: { foo: string, bar: number, baz: string, bad: number, extra: { foo: string, bar: number, baz: string, bad: number } } } } } } }` Success
      */
-    someTestList: (params: RequestParams = {}) =>
+    someTestList: (
+      params: RequestParams = {},
+    ): Promise<
+      HttpResponse<
+        {
+          user: {
+            foo: number;
+            extra: {
+              id: number;
+              extra: {
+                foo: string;
+                bar: number;
+                baz: string;
+                bad: number;
+                extra: {
+                  foo: string;
+                  bar: number;
+                  baz: string;
+                  bad: number;
+                  extra: {
+                    foo: string;
+                    bar: number;
+                    baz: string;
+                    bad: number;
+                    extra: { foo: string; bar: number; baz: string; bad: number };
+                  };
+                };
+              };
+            };
+          };
+        },
+        any
+      >
+    > =>
       this.request<
         {
           user: {
@@ -1725,7 +1758,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeEmojisGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    pathParamsList: (petId: number, params: RequestParams = {}) =>
+    pathParamsList: (
+      petId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeEmojisGeneratedDataContract, void>> =>
       this.request<SwaggerTypeEmojisGeneratedDataContract, void>({
         path: `/path-params`,
         method: "GET",
@@ -1742,7 +1778,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeEventsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    eventsList: (params: RequestParams = {}) =>
+    eventsList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeEventsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeEventsGeneratedDataContract, void>({
         path: `/events`,
         method: "GET",
@@ -1759,7 +1795,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeFeedsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    feedsList: (params: RequestParams = {}) =>
+    feedsList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeFeedsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeFeedsGeneratedDataContract, void>({
         path: `/feeds`,
         method: "GET",
@@ -1776,7 +1812,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGistsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gistsList: (query?: { since?: string }, params: RequestParams = {}) =>
+    gistsList: (
+      query?: { since?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGistsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGistsGeneratedDataContract, void>({
         path: `/gists`,
         method: "GET",
@@ -1793,7 +1832,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `201` `SwaggerTypeGistGeneratedDataContract` Created
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gistsCreate: (body: SwaggerTypePostGistGeneratedDataContract, params: RequestParams = {}) =>
+    gistsCreate: (
+      body: SwaggerTypePostGistGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGistGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGistGeneratedDataContract, void>({
         path: `/gists`,
         method: "POST",
@@ -1811,7 +1853,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGistsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    publicList: (query?: { since?: string }, params: RequestParams = {}) =>
+    publicList: (
+      query?: { since?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGistsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGistsGeneratedDataContract, void>({
         path: `/gists/public`,
         method: "GET",
@@ -1828,7 +1873,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGistsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    starredList: (query?: { since?: string }, params: RequestParams = {}) =>
+    starredList: (
+      query?: { since?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGistsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGistsGeneratedDataContract, void>({
         path: `/gists/starred`,
         method: "GET",
@@ -1845,7 +1893,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gistsDelete: (id: number, params: RequestParams = {}) =>
+    gistsDelete: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/gists/${id}`,
         method: "DELETE",
@@ -1860,7 +1908,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGistGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gistsDetail: (id: number, params: RequestParams = {}) =>
+    gistsDetail: (
+      id: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGistGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGistGeneratedDataContract, void>({
         path: `/gists/${id}`,
         method: "GET",
@@ -1876,7 +1927,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGistGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gistsPartialUpdate: (id: number, body: SwaggerTypePatchGistGeneratedDataContract, params: RequestParams = {}) =>
+    gistsPartialUpdate: (
+      id: number,
+      body: SwaggerTypePatchGistGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGistGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGistGeneratedDataContract, void>({
         path: `/gists/${id}`,
         method: "PATCH",
@@ -1894,7 +1949,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCommentsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commentsDetail: (id: number, params: RequestParams = {}) =>
+    commentsDetail: (
+      id: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCommentsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommentsGeneratedDataContract, void>({
         path: `/gists/${id}/comments`,
         method: "GET",
@@ -1910,7 +1968,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `201` `SwaggerTypeCommentGeneratedDataContract` Created
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commentsCreate: (id: number, body: SwaggerTypeCommentBodyGeneratedDataContract, params: RequestParams = {}) =>
+    commentsCreate: (
+      id: number,
+      body: SwaggerTypeCommentBodyGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommentGeneratedDataContract, void>({
         path: `/gists/${id}/comments`,
         method: "POST",
@@ -1927,7 +1989,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commentsDelete: (id: number, commentId: number, params: RequestParams = {}) =>
+    commentsDelete: (id: number, commentId: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/gists/${id}/comments/${commentId}`,
         method: "DELETE",
@@ -1944,7 +2006,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCommentGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commentsDetail2: (id: number, commentId: number, params: RequestParams = {}) =>
+    commentsDetail2: (
+      id: number,
+      commentId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommentGeneratedDataContract, void>({
         path: `/gists/${id}/comments/${commentId}`,
         method: "GET",
@@ -1965,7 +2031,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       commentId: number,
       body: SwaggerTypeCommentGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommentGeneratedDataContract, void>({
         path: `/gists/${id}/comments/${commentId}`,
         method: "PATCH",
@@ -1984,7 +2050,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` Not exists.
      */
-    forksCreate: (id: number, params: RequestParams = {}) =>
+    forksCreate: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/gists/${id}/forks`,
         method: "POST",
@@ -1999,7 +2065,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Item removed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    starDelete: (id: number, params: RequestParams = {}) =>
+    starDelete: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/gists/${id}/star`,
         method: "DELETE",
@@ -2015,7 +2081,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` Not exists.
      */
-    starDetail: (id: number, params: RequestParams = {}) =>
+    starDetail: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/gists/${id}/star`,
         method: "GET",
@@ -2030,7 +2096,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Starred.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    starUpdate: (id: number, params: RequestParams = {}) =>
+    starUpdate: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/gists/${id}/star`,
         method: "PUT",
@@ -2046,7 +2112,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGitignoreGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    templatesList: (params: RequestParams = {}) =>
+    templatesList: (
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGitignoreGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitignoreGeneratedDataContract, void>({
         path: `/gitignore/templates`,
         method: "GET",
@@ -2062,7 +2130,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGitignoreLangGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    templatesDetail: (language: string, params: RequestParams = {}) =>
+    templatesDetail: (
+      language: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGitignoreLangGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitignoreLangGeneratedDataContract, void>({
         path: `/gitignore/templates/${language}`,
         method: "GET",
@@ -2089,7 +2160,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         since?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesGeneratedDataContract, void>({
         path: `/issues`,
         method: "GET",
@@ -2114,7 +2185,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       owner: string,
       repository: string,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSearchIssuesByKeywordGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchIssuesByKeywordGeneratedDataContract, void>({
         path: `/legacy/issues/search/${owner}/${repository}/${state}/${keyword}`,
         method: "GET",
@@ -2135,7 +2206,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       keyword: string,
       query?: { order?: "desc" | "asc"; language?: string; start_page?: string; sort?: "updated" | "stars" | "forks" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSearchRepositoriesByKeywordGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchRepositoriesByKeywordGeneratedDataContract, void>({
         path: `/legacy/repos/search/${keyword}`,
         method: "GET",
@@ -2153,7 +2224,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeSearchUserByEmailGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    userEmailDetail: (email: string, params: RequestParams = {}) =>
+    userEmailDetail: (
+      email: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeSearchUserByEmailGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchUserByEmailGeneratedDataContract, void>({
         path: `/legacy/user/email/${email}`,
         method: "GET",
@@ -2174,7 +2248,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       keyword: string,
       query?: { order?: "desc" | "asc"; start_page?: string; sort?: "updated" | "stars" | "forks" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSearchUsersByKeywordGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchUsersByKeywordGeneratedDataContract, void>({
         path: `/legacy/user/search/${keyword}`,
         method: "GET",
@@ -2192,7 +2266,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `void` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    markdownCreate: (body: SwaggerTypeMarkdownGeneratedDataContract, params: RequestParams = {}) =>
+    markdownCreate: (
+      body: SwaggerTypeMarkdownGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/markdown`,
         method: "POST",
@@ -2209,7 +2286,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `void` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    postMarkdown: (params: RequestParams = {}) =>
+    postMarkdown: (params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/markdown/raw`,
         method: "POST",
@@ -2225,7 +2302,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeMetaGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    metaList: (params: RequestParams = {}) =>
+    metaList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeMetaGeneratedDataContract, void>> =>
       this.request<SwaggerTypeMetaGeneratedDataContract, void>({
         path: `/meta`,
         method: "GET",
@@ -2242,7 +2319,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeEventsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    eventsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    eventsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeEventsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeEventsGeneratedDataContract, void>({
         path: `/networks/${owner}/${repo}/events`,
         method: "GET",
@@ -2262,7 +2343,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     notificationsList: (
       query?: { all?: boolean; participating?: boolean; since?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeNotificationsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeNotificationsGeneratedDataContract, void>({
         path: `/notifications`,
         method: "GET",
@@ -2279,7 +2360,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `205` `void` Marked as read.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    notificationsUpdate: (body: SwaggerTypeNotificationMarkReadGeneratedDataContract, params: RequestParams = {}) =>
+    notificationsUpdate: (
+      body: SwaggerTypeNotificationMarkReadGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/notifications`,
         method: "PUT",
@@ -2295,7 +2379,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeNotificationsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    threadsDetail: (id: number, params: RequestParams = {}) =>
+    threadsDetail: (
+      id: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeNotificationsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeNotificationsGeneratedDataContract, void>({
         path: `/notifications/threads/${id}`,
         method: "GET",
@@ -2311,7 +2398,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `205` `void` Thread marked as read.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    threadsPartialUpdate: (id: number, params: RequestParams = {}) =>
+    threadsPartialUpdate: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/notifications/threads/${id}`,
         method: "PATCH",
@@ -2326,7 +2413,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No Content
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    threadsSubscriptionDelete: (id: number, params: RequestParams = {}) =>
+    threadsSubscriptionDelete: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/notifications/threads/${id}/subscription`,
         method: "DELETE",
@@ -2341,7 +2428,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeSubscriptionGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    threadsSubscriptionDetail: (id: number, params: RequestParams = {}) =>
+    threadsSubscriptionDetail: (
+      id: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeSubscriptionGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSubscriptionGeneratedDataContract, void>({
         path: `/notifications/threads/${id}/subscription`,
         method: "GET",
@@ -2361,7 +2451,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: number,
       body: SwaggerTypePutSubscriptionGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSubscriptionGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSubscriptionGeneratedDataContract, void>({
         path: `/notifications/threads/${id}/subscription`,
         method: "PUT",
@@ -2380,7 +2470,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeOrganizationGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    orgsDetail: (org: string, params: RequestParams = {}) =>
+    orgsDetail: (
+      org: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeOrganizationGeneratedDataContract, void>> =>
       this.request<SwaggerTypeOrganizationGeneratedDataContract, void>({
         path: `/orgs/${org}`,
         method: "GET",
@@ -2396,7 +2489,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeOrganizationGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    orgsPartialUpdate: (org: string, body: SwaggerTypePatchOrgGeneratedDataContract, params: RequestParams = {}) =>
+    orgsPartialUpdate: (
+      org: string,
+      body: SwaggerTypePatchOrgGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeOrganizationGeneratedDataContract, void>> =>
       this.request<SwaggerTypeOrganizationGeneratedDataContract, void>({
         path: `/orgs/${org}`,
         method: "PATCH",
@@ -2414,7 +2511,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeEventsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    eventsDetail: (org: string, params: RequestParams = {}) =>
+    eventsDetail: (
+      org: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeEventsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeEventsGeneratedDataContract, void>({
         path: `/orgs/${org}/events`,
         method: "GET",
@@ -2441,7 +2541,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         since?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesGeneratedDataContract, void>({
         path: `/orgs/${org}/issues`,
         method: "GET",
@@ -2459,7 +2559,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `302` `void` Response if requester is not an organization member.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    membersDetail: (org: string, params: RequestParams = {}) =>
+    membersDetail: (
+      org: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/orgs/${org}/members`,
         method: "GET",
@@ -2475,7 +2578,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    membersDelete: (org: string, username: string, params: RequestParams = {}) =>
+    membersDelete: (org: string, username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/orgs/${org}/members/${username}`,
         method: "DELETE",
@@ -2494,7 +2597,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` Not Found. a. Response if requester is an organization member and user is not a member b. Response if requester is not an organization member and is inquiring about themselves
      */
-    membersDetail2: (org: string, username: string, params: RequestParams = {}) =>
+    membersDetail2: (org: string, username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/orgs/${org}/members/${username}`,
         method: "GET",
@@ -2509,7 +2612,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    publicMembersDetail: (org: string, params: RequestParams = {}) =>
+    publicMembersDetail: (
+      org: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/orgs/${org}/public_members`,
         method: "GET",
@@ -2525,7 +2631,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Concealed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    publicMembersDelete: (org: string, username: string, params: RequestParams = {}) =>
+    publicMembersDelete: (
+      org: string,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/orgs/${org}/public_members/${username}`,
         method: "DELETE",
@@ -2543,7 +2653,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` User is not a public member.
      */
-    publicMembersDetail2: (org: string, username: string, params: RequestParams = {}) =>
+    publicMembersDetail2: (
+      org: string,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/orgs/${org}/public_members/${username}`,
         method: "GET",
@@ -2558,7 +2672,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Publicized.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    publicMembersUpdate: (org: string, username: string, params: RequestParams = {}) =>
+    publicMembersUpdate: (
+      org: string,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/orgs/${org}/public_members/${username}`,
         method: "PUT",
@@ -2577,7 +2695,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       org: string,
       query?: { type?: "all" | "public" | "private" | "forks" | "sources" | "member" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReposGeneratedDataContract, void>({
         path: `/orgs/${org}/repos`,
         method: "GET",
@@ -2594,7 +2712,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `201` `SwaggerTypeReposGeneratedDataContract` Created
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposCreate: (org: string, body: SwaggerTypePostRepoGeneratedDataContract, params: RequestParams = {}) =>
+    reposCreate: (
+      org: string,
+      body: SwaggerTypePostRepoGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReposGeneratedDataContract, void>({
         path: `/orgs/${org}/repos`,
         method: "POST",
@@ -2611,7 +2733,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTeamsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    teamsDetail: (org: string, params: RequestParams = {}) =>
+    teamsDetail: (
+      org: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTeamsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamsGeneratedDataContract, void>({
         path: `/orgs/${org}/teams`,
         method: "GET",
@@ -2627,7 +2752,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `201` `SwaggerTypeTeamGeneratedDataContract` Created
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    teamsCreate: (org: string, body: SwaggerTypeOrgTeamsPostGeneratedDataContract, params: RequestParams = {}) =>
+    teamsCreate: (
+      org: string,
+      body: SwaggerTypeOrgTeamsPostGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTeamGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamGeneratedDataContract, void>({
         path: `/orgs/${org}/teams`,
         method: "POST",
@@ -2646,7 +2775,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRateLimitGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    rateLimitList: (params: RequestParams = {}) =>
+    rateLimitList: (
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRateLimitGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRateLimitGeneratedDataContract, void>({
         path: `/rate_limit`,
         method: "GET",
@@ -2663,7 +2794,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Item removed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposDelete: (owner: string, repo: string, params: RequestParams = {}) =>
+    reposDelete: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}`,
         method: "DELETE",
@@ -2678,7 +2809,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRepoGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    reposDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRepoGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}`,
         method: "GET",
@@ -2699,7 +2834,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeRepoEditGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeRepoGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}`,
         method: "PATCH",
@@ -2717,7 +2852,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeAssigneesGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    assigneesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    assigneesDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeAssigneesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeAssigneesGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/assignees`,
         method: "GET",
@@ -2736,7 +2875,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` User isn't an assignee.
      */
-    assigneesDetail2: (owner: string, repo: string, assignee: string, params: RequestParams = {}) =>
+    assigneesDetail2: (
+      owner: string,
+      repo: string,
+      assignee: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/assignees/${assignee}`,
         method: "GET",
@@ -2751,7 +2895,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeBranchesGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    branchesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    branchesDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeBranchesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeBranchesGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/branches`,
         method: "GET",
@@ -2769,7 +2917,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeBranchGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    branchesDetail2: (owner: string, repo: string, branch: string, params: RequestParams = {}) =>
+    branchesDetail2: (
+      owner: string,
+      repo: string,
+      branch: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeBranchGeneratedDataContract, void>> =>
       this.request<SwaggerTypeBranchGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/branches/${branch}`,
         method: "GET",
@@ -2785,7 +2938,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    collaboratorsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    collaboratorsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/collaborators`,
         method: "GET",
@@ -2801,7 +2958,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Collaborator removed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    collaboratorsDelete: (owner: string, repo: string, user: string, params: RequestParams = {}) =>
+    collaboratorsDelete: (
+      owner: string,
+      repo: string,
+      user: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/collaborators/${user}`,
         method: "DELETE",
@@ -2819,7 +2981,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` User is not a collaborator.
      */
-    collaboratorsDetail2: (owner: string, repo: string, user: string, params: RequestParams = {}) =>
+    collaboratorsDetail2: (
+      owner: string,
+      repo: string,
+      user: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/collaborators/${user}`,
         method: "GET",
@@ -2834,7 +3001,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Collaborator added.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    collaboratorsUpdate: (owner: string, repo: string, user: string, params: RequestParams = {}) =>
+    collaboratorsUpdate: (
+      owner: string,
+      repo: string,
+      user: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/collaborators/${user}`,
         method: "PUT",
@@ -2849,7 +3021,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRepoCommentsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commentsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    commentsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRepoCommentsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoCommentsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/comments`,
         method: "GET",
@@ -2865,7 +3041,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commentsDelete: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
+    commentsDelete: (
+      owner: string,
+      repo: string,
+      commentId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "DELETE",
@@ -2882,7 +3063,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCommitCommentGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commentsDetail2: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
+    commentsDetail2: (
+      owner: string,
+      repo: string,
+      commentId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCommitCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommitCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "GET",
@@ -2904,7 +3090,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       commentId: number,
       body: SwaggerTypeCommentBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeCommitCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommitCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/comments/${commentId}`,
         method: "PATCH",
@@ -2926,7 +3112,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       query?: { since?: string; sha?: string; path?: string; author?: string; until?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeCommitsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommitsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/commits`,
         method: "GET",
@@ -2943,7 +3129,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRefStatusGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commitsStatusDetail: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
+    commitsStatusDetail: (
+      owner: string,
+      repo: string,
+      ref: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRefStatusGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRefStatusGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/commits/${ref}/status`,
         method: "GET",
@@ -2961,7 +3152,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCommitGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commitsDetail2: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
+    commitsDetail2: (
+      owner: string,
+      repo: string,
+      shaCode: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCommitGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommitGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/commits/${shaCode}`,
         method: "GET",
@@ -2977,7 +3173,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRepoCommentsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    commitsCommentsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
+    commitsCommentsDetail: (
+      owner: string,
+      repo: string,
+      shaCode: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRepoCommentsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoCommentsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/commits/${shaCode}/comments`,
         method: "GET",
@@ -2999,7 +3200,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       shaCode: string,
       body: SwaggerTypeCommitCommentBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeCommitCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommitCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/commits/${shaCode}/comments`,
         method: "POST",
@@ -3017,7 +3218,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCompareCommitsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    compareDetail: (owner: string, repo: string, baseId: string, headId: string, params: RequestParams = {}) =>
+    compareDetail: (
+      owner: string,
+      repo: string,
+      baseId: string,
+      headId: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCompareCommitsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCompareCommitsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/compare/${baseId}...${headId}`,
         method: "GET",
@@ -3039,7 +3246,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       path: string,
       body: SwaggerTypeDeleteFileBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeDeleteFileGeneratedDataContract, void>> =>
       this.request<SwaggerTypeDeleteFileGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "DELETE",
@@ -3063,7 +3270,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       path: string,
       query?: { path?: string; ref?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeContentsPathGeneratedDataContract, void>> =>
       this.request<SwaggerTypeContentsPathGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "GET",
@@ -3086,7 +3293,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       path: string,
       body: SwaggerTypeCreateFileBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeCreateFileGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCreateFileGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/contents/${path}`,
         method: "PUT",
@@ -3104,7 +3311,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    contributorsDetail: (owner: string, repo: string, query: { anon: string }, params: RequestParams = {}) =>
+    contributorsDetail: (
+      owner: string,
+      repo: string,
+      query: { anon: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/contributors`,
         method: "GET",
@@ -3121,7 +3333,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRepoDeploymentsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    deploymentsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    deploymentsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRepoDeploymentsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoDeploymentsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/deployments`,
         method: "GET",
@@ -3142,7 +3358,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeDeploymentGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeDeploymentRespGeneratedDataContract, void>> =>
       this.request<SwaggerTypeDeploymentRespGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/deployments`,
         method: "POST",
@@ -3160,7 +3376,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeDeploymentStatusesGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    deploymentsStatusesDetail: (owner: string, repo: string, id: number, params: RequestParams = {}) =>
+    deploymentsStatusesDetail: (
+      owner: string,
+      repo: string,
+      id: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeDeploymentStatusesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeDeploymentStatusesGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/deployments/${id}/statuses`,
         method: "GET",
@@ -3182,7 +3403,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: number,
       body: SwaggerTypeDeploymentStatusesCreateGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/deployments/${id}/statuses`,
         method: "POST",
@@ -3200,7 +3421,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeDownloadsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    downloadsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    downloadsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeDownloadsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeDownloadsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/downloads`,
         method: "GET",
@@ -3217,7 +3442,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    downloadsDelete: (owner: string, repo: string, downloadId: number, params: RequestParams = {}) =>
+    downloadsDelete: (
+      owner: string,
+      repo: string,
+      downloadId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/downloads/${downloadId}`,
         method: "DELETE",
@@ -3235,7 +3465,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeDownloadGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    downloadsDetail2: (owner: string, repo: string, downloadId: number, params: RequestParams = {}) =>
+    downloadsDetail2: (
+      owner: string,
+      repo: string,
+      downloadId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeDownloadGeneratedDataContract, void>> =>
       this.request<SwaggerTypeDownloadGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/downloads/${downloadId}`,
         method: "GET",
@@ -3251,7 +3486,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeEventsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    eventsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    eventsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeEventsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeEventsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/events`,
         method: "GET",
@@ -3272,7 +3511,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       query?: { sort?: "newes" | "oldes" | "watchers" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeForksGeneratedDataContract, void>> =>
       this.request<SwaggerTypeForksGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/forks`,
         method: "GET",
@@ -3294,7 +3533,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeForkBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeRepoGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/forks`,
         method: "POST",
@@ -3317,7 +3556,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeBlobGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeBlobsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeBlobsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/blobs`,
         method: "POST",
@@ -3335,7 +3574,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeBlobGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gitBlobsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
+    gitBlobsDetail: (
+      owner: string,
+      repo: string,
+      shaCode: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeBlobGeneratedDataContract, void>> =>
       this.request<SwaggerTypeBlobGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/blobs/${shaCode}`,
         method: "GET",
@@ -3356,7 +3600,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeRepoCommitBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeGitCommitGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitCommitGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/commits`,
         method: "POST",
@@ -3374,7 +3618,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRepoCommitGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gitCommitsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
+    gitCommitsDetail: (
+      owner: string,
+      repo: string,
+      shaCode: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRepoCommitGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoCommitGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/commits/${shaCode}`,
         method: "GET",
@@ -3390,7 +3639,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRefsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gitRefsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    gitRefsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRefsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRefsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/refs`,
         method: "GET",
@@ -3411,7 +3664,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeRefsBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeHeadBranchGeneratedDataContract, void>> =>
       this.request<SwaggerTypeHeadBranchGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/refs`,
         method: "POST",
@@ -3429,7 +3682,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No Content
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gitRefsDelete: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
+    gitRefsDelete: (
+      owner: string,
+      repo: string,
+      ref: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/git/refs/${ref}`,
         method: "DELETE",
@@ -3446,7 +3704,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeHeadBranchGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gitRefsDetail2: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
+    gitRefsDetail2: (
+      owner: string,
+      repo: string,
+      ref: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeHeadBranchGeneratedDataContract, void>> =>
       this.request<SwaggerTypeHeadBranchGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/refs/${ref}`,
         method: "GET",
@@ -3468,7 +3731,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       ref: string,
       body: SwaggerTypeGitRefPatchGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeHeadBranchGeneratedDataContract, void>> =>
       this.request<SwaggerTypeHeadBranchGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/refs/${ref}`,
         method: "PATCH",
@@ -3491,7 +3754,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeTagBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeTagGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTagGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/tags`,
         method: "POST",
@@ -3509,7 +3772,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTagGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gitTagsDetail: (owner: string, repo: string, shaCode: string, params: RequestParams = {}) =>
+    gitTagsDetail: (
+      owner: string,
+      repo: string,
+      shaCode: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTagGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTagGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/tags/${shaCode}`,
         method: "GET",
@@ -3530,7 +3798,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeTreeGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeTreesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTreesGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/trees`,
         method: "POST",
@@ -3554,7 +3822,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       shaCode: string,
       query?: { recursive?: number },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeTreeGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTreeGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/git/trees/${shaCode}`,
         method: "GET",
@@ -3571,7 +3839,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeHookGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    hooksDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    hooksDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeHookGeneratedDataContract, void>> =>
       this.request<SwaggerTypeHookGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/hooks`,
         method: "GET",
@@ -3592,7 +3864,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeHookBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeHookGeneratedDataContract, void>> =>
       this.request<SwaggerTypeHookGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/hooks`,
         method: "POST",
@@ -3609,7 +3881,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    hooksDelete: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
+    hooksDelete: (
+      owner: string,
+      repo: string,
+      hookId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "DELETE",
@@ -3626,7 +3903,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeHookGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    hooksDetail2: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
+    hooksDetail2: (
+      owner: string,
+      repo: string,
+      hookId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeHookGeneratedDataContract, void>> =>
       this.request<SwaggerTypeHookGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "GET",
@@ -3648,7 +3930,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       hookId: number,
       body: SwaggerTypeHookBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeHookGeneratedDataContract, void>> =>
       this.request<SwaggerTypeHookGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}`,
         method: "PATCH",
@@ -3665,7 +3947,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Hook is triggered.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    hooksTestsCreate: (owner: string, repo: string, hookId: number, params: RequestParams = {}) =>
+    hooksTestsCreate: (
+      owner: string,
+      repo: string,
+      hookId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/hooks/${hookId}/tests`,
         method: "POST",
@@ -3692,7 +3979,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         since?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues`,
         method: "GET",
@@ -3714,7 +4001,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeIssueGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssueGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssueGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues`,
         method: "POST",
@@ -3736,7 +4023,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       query?: { direction?: string; sort?: "created" | "updated"; since?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesCommentsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesCommentsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/comments`,
         method: "GET",
@@ -3753,7 +4040,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesCommentsDelete: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
+    issuesCommentsDelete: (
+      owner: string,
+      repo: string,
+      commentId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}`,
         method: "DELETE",
@@ -3770,7 +4062,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeIssuesCommentGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesCommentsDetail2: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
+    issuesCommentsDetail2: (
+      owner: string,
+      repo: string,
+      commentId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeIssuesCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}`,
         method: "GET",
@@ -3792,7 +4089,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       commentId: number,
       body: SwaggerTypeCommentBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/comments/${commentId}`,
         method: "PATCH",
@@ -3809,7 +4106,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeIssueEventsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesEventsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    issuesEventsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeIssueEventsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssueEventsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/events`,
         method: "GET",
@@ -3827,7 +4128,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeIssueEventGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesEventsDetail2: (owner: string, repo: string, eventId: number, params: RequestParams = {}) =>
+    issuesEventsDetail2: (
+      owner: string,
+      repo: string,
+      eventId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeIssueEventGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssueEventGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/events/${eventId}`,
         method: "GET",
@@ -3845,7 +4151,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeIssueGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesDetail2: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    issuesDetail2: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeIssueGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssueGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}`,
         method: "GET",
@@ -3867,7 +4178,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypeIssueGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssueGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssueGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}`,
         method: "PATCH",
@@ -3886,7 +4197,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeIssuesCommentsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesCommentsDetail3: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    issuesCommentsDetail3: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeIssuesCommentsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesCommentsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/comments`,
         method: "GET",
@@ -3908,7 +4224,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypeCommentBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/comments`,
         method: "POST",
@@ -3927,7 +4243,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeIssueEventsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesEventsDetail3: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    issuesEventsDetail3: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeIssueEventsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssueEventsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/events`,
         method: "GET",
@@ -3943,7 +4264,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesLabelsDelete: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    issuesLabelsDelete: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels`,
         method: "DELETE",
@@ -3958,7 +4284,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeLabelsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesLabelsDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    issuesLabelsDetail: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeLabelsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels`,
         method: "GET",
@@ -3980,7 +4311,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypeEmailsPostGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeLabelGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels`,
         method: "POST",
@@ -4003,7 +4334,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypeEmailsPostGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeLabelGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels`,
         method: "PUT",
@@ -4022,7 +4353,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Item removed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    issuesLabelsDelete2: (owner: string, repo: string, number: number, name: string, params: RequestParams = {}) =>
+    issuesLabelsDelete2: (
+      owner: string,
+      repo: string,
+      number: number,
+      name: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/issues/${number}/labels/${name}`,
         method: "DELETE",
@@ -4037,7 +4374,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeKeysGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    keysDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeKeysGeneratedDataContract, void>> =>
       this.request<SwaggerTypeKeysGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/keys`,
         method: "GET",
@@ -4058,7 +4399,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeUserKeysPostGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/keys`,
         method: "POST",
@@ -4075,7 +4416,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysDelete: (owner: string, repo: string, keyId: number, params: RequestParams = {}) =>
+    keysDelete: (
+      owner: string,
+      repo: string,
+      keyId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/keys/${keyId}`,
         method: "DELETE",
@@ -4092,7 +4438,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUserKeysKeyIdGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysDetail2: (owner: string, repo: string, keyId: number, params: RequestParams = {}) =>
+    keysDetail2: (
+      owner: string,
+      repo: string,
+      keyId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/keys/${keyId}`,
         method: "GET",
@@ -4108,7 +4459,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeLabelsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    labelsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    labelsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeLabelsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/labels`,
         method: "GET",
@@ -4129,7 +4484,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeEmailsPostGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeLabelGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/labels`,
         method: "POST",
@@ -4146,7 +4501,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    labelsDelete: (owner: string, repo: string, name: string, params: RequestParams = {}) =>
+    labelsDelete: (
+      owner: string,
+      repo: string,
+      name: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/labels/${name}`,
         method: "DELETE",
@@ -4163,7 +4523,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeLabelGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    labelsDetail2: (owner: string, repo: string, name: string, params: RequestParams = {}) =>
+    labelsDetail2: (
+      owner: string,
+      repo: string,
+      name: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeLabelGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/labels/${name}`,
         method: "GET",
@@ -4185,7 +4550,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       name: string,
       body: SwaggerTypeEmailsPostGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeLabelGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/labels/${name}`,
         method: "PATCH",
@@ -4202,7 +4567,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeLanguagesGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    languagesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    languagesDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeLanguagesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLanguagesGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/languages`,
         method: "GET",
@@ -4226,7 +4595,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeMergesBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<
+      HttpResponse<
+        SwaggerTypeMergesSuccessfulGeneratedDataContract,
+        void | SwaggerTypeMergesConflictGeneratedDataContract
+      >
+    > =>
       this.request<
         SwaggerTypeMergesSuccessfulGeneratedDataContract,
         void | SwaggerTypeMergesConflictGeneratedDataContract
@@ -4252,7 +4626,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       query?: { state?: "open" | "closed"; direction?: string; sort?: "due_date" | "completeness" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeMilestoneGeneratedDataContract, void>> =>
       this.request<SwaggerTypeMilestoneGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/milestones`,
         method: "GET",
@@ -4274,7 +4648,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeMilestoneUpdateGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeMilestoneGeneratedDataContract, void>> =>
       this.request<SwaggerTypeMilestoneGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/milestones`,
         method: "POST",
@@ -4291,7 +4665,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    milestonesDelete: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    milestonesDelete: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/milestones/${number}`,
         method: "DELETE",
@@ -4308,7 +4687,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeMilestoneGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    milestonesDetail2: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    milestonesDetail2: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeMilestoneGeneratedDataContract, void>> =>
       this.request<SwaggerTypeMilestoneGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/milestones/${number}`,
         method: "GET",
@@ -4330,7 +4714,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypeMilestoneUpdateGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeMilestoneGeneratedDataContract, void>> =>
       this.request<SwaggerTypeMilestoneGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/milestones/${number}`,
         method: "PATCH",
@@ -4347,7 +4731,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeLabelsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    milestonesLabelsDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    milestonesLabelsDetail: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeLabelsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeLabelsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/milestones/${number}/labels`,
         method: "GET",
@@ -4368,7 +4757,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       query?: { all?: boolean; participating?: boolean; since?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeNotificationsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeNotificationsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/notifications`,
         method: "GET",
@@ -4390,7 +4779,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeNotificationMarkReadGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/notifications`,
         method: "PUT",
@@ -4411,7 +4800,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       query?: { state?: "open" | "closed"; head?: string; base?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypePullsGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls`,
         method: "GET",
@@ -4433,7 +4822,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypePullsPostGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypePullsGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls`,
         method: "POST",
@@ -4456,7 +4845,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       query?: { direction?: string; sort?: "created" | "updated"; since?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesCommentsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesCommentsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/comments`,
         method: "GET",
@@ -4473,7 +4862,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    pullsCommentsDelete: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
+    pullsCommentsDelete: (
+      owner: string,
+      repo: string,
+      commentId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "DELETE",
@@ -4490,7 +4884,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypePullsCommentGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    pullsCommentsDetail2: (owner: string, repo: string, commentId: number, params: RequestParams = {}) =>
+    pullsCommentsDetail2: (
+      owner: string,
+      repo: string,
+      commentId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypePullsCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullsCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "GET",
@@ -4512,7 +4911,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       commentId: number,
       body: SwaggerTypeCommentBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypePullsCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullsCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/comments/${commentId}`,
         method: "PATCH",
@@ -4531,7 +4930,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypePullRequestGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    pullsDetail2: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    pullsDetail2: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypePullRequestGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullRequestGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}`,
         method: "GET",
@@ -4553,7 +4957,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypePullUpdateGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeRepoGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRepoGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}`,
         method: "PATCH",
@@ -4573,7 +4977,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypePullsCommentGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    pullsCommentsDetail3: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    pullsCommentsDetail3: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypePullsCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullsCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/comments`,
         method: "GET",
@@ -4595,7 +5004,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypePullsCommentPostGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypePullsCommentGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullsCommentGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/comments`,
         method: "POST",
@@ -4613,7 +5022,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCommitsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    pullsCommitsDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    pullsCommitsDetail: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCommitsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommitsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/commits`,
         method: "GET",
@@ -4629,7 +5043,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypePullsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    pullsFilesDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    pullsFilesDetail: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypePullsGeneratedDataContract, void>> =>
       this.request<SwaggerTypePullsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/files`,
         method: "GET",
@@ -4646,7 +5065,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` Pull request has not been merged.
      */
-    pullsMergeDetail: (owner: string, repo: string, number: number, params: RequestParams = {}) =>
+    pullsMergeDetail: (
+      owner: string,
+      repo: string,
+      number: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/pulls/${number}/merge`,
         method: "GET",
@@ -4668,7 +5092,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       number: number,
       body: SwaggerTypeMergePullBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeMergeGeneratedDataContract, void | SwaggerTypeMergeGeneratedDataContract>> =>
       this.request<SwaggerTypeMergeGeneratedDataContract, void | SwaggerTypeMergeGeneratedDataContract>({
         path: `/repos/${owner}/${repo}/pulls/${number}/merge`,
         method: "PUT",
@@ -4686,7 +5110,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeContentsPathGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    readmeDetail: (owner: string, repo: string, query?: { ref?: string }, params: RequestParams = {}) =>
+    readmeDetail: (
+      owner: string,
+      repo: string,
+      query?: { ref?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeContentsPathGeneratedDataContract, void>> =>
       this.request<SwaggerTypeContentsPathGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/readme`,
         method: "GET",
@@ -4703,7 +5132,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeReleasesGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    releasesDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    releasesDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeReleasesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReleasesGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/releases`,
         method: "GET",
@@ -4724,7 +5157,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeReleaseCreateGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeReleaseGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReleaseGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/releases`,
         method: "POST",
@@ -4741,7 +5174,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No Content
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    releasesAssetsDelete: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
+    releasesAssetsDelete: (
+      owner: string,
+      repo: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/releases/assets/${id}`,
         method: "DELETE",
@@ -4756,7 +5194,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeAssetGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    releasesAssetsDetail: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
+    releasesAssetsDetail: (
+      owner: string,
+      repo: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeAssetGeneratedDataContract, void>> =>
       this.request<SwaggerTypeAssetGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/releases/assets/${id}`,
         method: "GET",
@@ -4778,7 +5221,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       body: SwaggerTypeAssetPatchGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeAssetGeneratedDataContract, void>> =>
       this.request<SwaggerTypeAssetGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/releases/assets/${id}`,
         method: "PATCH",
@@ -4796,7 +5239,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No Content
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    releasesDelete: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
+    releasesDelete: (
+      owner: string,
+      repo: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/releases/${id}`,
         method: "DELETE",
@@ -4813,7 +5261,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeReleaseGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    releasesDetail2: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
+    releasesDetail2: (
+      owner: string,
+      repo: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeReleaseGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReleaseGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/releases/${id}`,
         method: "GET",
@@ -4835,7 +5288,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       body: SwaggerTypeReleaseCreateGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeReleaseGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReleaseGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/releases/${id}`,
         method: "PATCH",
@@ -4854,7 +5307,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeAssetsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    releasesAssetsDetail2: (owner: string, repo: string, id: string, params: RequestParams = {}) =>
+    releasesAssetsDetail2: (
+      owner: string,
+      repo: string,
+      id: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeAssetsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeAssetsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/releases/${id}/assets`,
         method: "GET",
@@ -4870,7 +5328,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    stargazersDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    stargazersDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/stargazers`,
         method: "GET",
@@ -4886,7 +5348,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCodeFrequencyStatsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    statsCodeFrequencyDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    statsCodeFrequencyDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCodeFrequencyStatsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCodeFrequencyStatsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/stats/code_frequency`,
         method: "GET",
@@ -4902,7 +5368,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCommitActivityStatsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    statsCommitActivityDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    statsCommitActivityDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCommitActivityStatsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCommitActivityStatsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/stats/commit_activity`,
         method: "GET",
@@ -4918,7 +5388,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeContributorsStatsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    statsContributorsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    statsContributorsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeContributorsStatsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeContributorsStatsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/stats/contributors`,
         method: "GET",
@@ -4934,7 +5408,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeParticipationStatsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    statsParticipationDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    statsParticipationDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeParticipationStatsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeParticipationStatsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/stats/participation`,
         method: "GET",
@@ -4950,7 +5428,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeCodeFrequencyStatsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    statsPunchCardDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    statsPunchCardDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeCodeFrequencyStatsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeCodeFrequencyStatsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/stats/punch_card`,
         method: "GET",
@@ -4966,7 +5448,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeRefGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    statusesDetail: (owner: string, repo: string, ref: string, params: RequestParams = {}) =>
+    statusesDetail: (
+      owner: string,
+      repo: string,
+      ref: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeRefGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRefGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/statuses/${ref}`,
         method: "GET",
@@ -4988,7 +5475,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       ref: string,
       body: SwaggerTypeHeadBranchGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeRefGeneratedDataContract, void>> =>
       this.request<SwaggerTypeRefGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/statuses/${ref}`,
         method: "POST",
@@ -5006,7 +5493,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    subscribersDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    subscribersDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/subscribers`,
         method: "GET",
@@ -5022,7 +5513,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    subscriptionDelete: (owner: string, repo: string, params: RequestParams = {}) =>
+    subscriptionDelete: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/repos/${owner}/${repo}/subscription`,
         method: "DELETE",
@@ -5037,7 +5528,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeSubscriptionGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    subscriptionDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    subscriptionDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeSubscriptionGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSubscriptionGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/subscription`,
         method: "GET",
@@ -5058,7 +5553,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       repo: string,
       body: SwaggerTypeSubscriptionBodyGeneratedDataContract,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSubscriptionGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSubscriptionGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/subscription`,
         method: "PUT",
@@ -5076,7 +5571,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTagsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    tagsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    tagsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTagsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTagsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/tags`,
         method: "GET",
@@ -5092,7 +5591,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTeamsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    teamsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    teamsDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTeamsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamsGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/teams`,
         method: "GET",
@@ -5108,7 +5611,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    watchersDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    watchersDetail: (
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/repos/${owner}/${repo}/watchers`,
         method: "GET",
@@ -5132,7 +5639,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       archiveFormat: "tarball" | "zipball",
       path: string,
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/repos/${owner}/${repo}/${archiveFormat}/${path}`,
         method: "GET",
@@ -5148,7 +5655,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeReposGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    repositoriesList: (query?: { since?: string }, params: RequestParams = {}) =>
+    repositoriesList: (
+      query?: { since?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReposGeneratedDataContract, void>({
         path: `/repositories`,
         method: "GET",
@@ -5166,7 +5676,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeSearchCodeGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    codeList: (query: { order?: "desc" | "asc"; q: string; sort?: "indexed" }, params: RequestParams = {}) =>
+    codeList: (
+      query: { order?: "desc" | "asc"; q: string; sort?: "indexed" },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeSearchCodeGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchCodeGeneratedDataContract, void>({
         path: `/search/code`,
         method: "GET",
@@ -5186,7 +5699,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     issuesList: (
       query: { order?: "desc" | "asc"; q: string; sort?: "updated" | "created" | "comments" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSearchIssuesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchIssuesGeneratedDataContract, void>({
         path: `/search/issues`,
         method: "GET",
@@ -5206,7 +5719,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     repositoriesList: (
       query: { order?: "desc" | "asc"; q: string; sort?: "stars" | "forks" | "updated" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSearchRepositoriesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchRepositoriesGeneratedDataContract, void>({
         path: `/search/repositories`,
         method: "GET",
@@ -5226,7 +5739,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     usersList: (
       query: { order?: "desc" | "asc"; q: string; sort?: "followers" | "repositories" | "joined" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeSearchUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeSearchUsersGeneratedDataContract, void>({
         path: `/search/users`,
         method: "GET",
@@ -5244,7 +5757,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    teamsDelete: (teamId: number, params: RequestParams = {}) =>
+    teamsDelete: (teamId: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/teams/${teamId}`,
         method: "DELETE",
@@ -5259,7 +5772,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTeamGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    teamsDetail: (teamId: number, params: RequestParams = {}) =>
+    teamsDetail: (
+      teamId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTeamGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamGeneratedDataContract, void>({
         path: `/teams/${teamId}`,
         method: "GET",
@@ -5275,7 +5791,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTeamGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    teamsPartialUpdate: (teamId: number, body: SwaggerTypeEditTeamGeneratedDataContract, params: RequestParams = {}) =>
+    teamsPartialUpdate: (
+      teamId: number,
+      body: SwaggerTypeEditTeamGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTeamGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamGeneratedDataContract, void>({
         path: `/teams/${teamId}`,
         method: "PATCH",
@@ -5293,7 +5813,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    membersDetail: (teamId: number, params: RequestParams = {}) =>
+    membersDetail: (
+      teamId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/teams/${teamId}/members`,
         method: "GET",
@@ -5310,7 +5833,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Team member removed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    membersDelete: (teamId: number, username: string, params: RequestParams = {}) =>
+    membersDelete: (teamId: number, username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/teams/${teamId}/members/${username}`,
         method: "DELETE",
@@ -5329,7 +5852,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` User is not a member.
      */
-    membersDetail2: (teamId: number, username: string, params: RequestParams = {}) =>
+    membersDetail2: (teamId: number, username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/teams/${teamId}/members/${username}`,
         method: "GET",
@@ -5346,7 +5869,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `422` `SwaggerTypeOrganizationAsTeamMemberGeneratedDataContract` If you attempt to add an organization to a team, you will get this.
      */
-    membersUpdate: (teamId: number, username: string, params: RequestParams = {}) =>
+    membersUpdate: (
+      teamId: number,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void | SwaggerTypeOrganizationAsTeamMemberGeneratedDataContract>> =>
       this.request<void, void | SwaggerTypeOrganizationAsTeamMemberGeneratedDataContract>({
         path: `/teams/${teamId}/members/${username}`,
         method: "PUT",
@@ -5361,7 +5888,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Team member removed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    membershipsDelete: (teamId: number, username: string, params: RequestParams = {}) =>
+    membershipsDelete: (
+      teamId: number,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/teams/${teamId}/memberships/${username}`,
         method: "DELETE",
@@ -5377,7 +5908,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` User has no membership with team
      */
-    membershipsDetail: (teamId: number, username: string, params: RequestParams = {}) =>
+    membershipsDetail: (
+      teamId: number,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTeamMembershipGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamMembershipGeneratedDataContract, void>({
         path: `/teams/${teamId}/memberships/${username}`,
         method: "GET",
@@ -5394,7 +5929,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `422` `SwaggerTypeOrganizationAsTeamMemberGeneratedDataContract` If you attempt to add an organization to a team, you will get this.
      */
-    membershipsUpdate: (teamId: number, username: string, params: RequestParams = {}) =>
+    membershipsUpdate: (
+      teamId: number,
+      username: string,
+      params: RequestParams = {},
+    ): Promise<
+      HttpResponse<
+        SwaggerTypeTeamMembershipGeneratedDataContract,
+        void | SwaggerTypeOrganizationAsTeamMemberGeneratedDataContract
+      >
+    > =>
       this.request<
         SwaggerTypeTeamMembershipGeneratedDataContract,
         void | SwaggerTypeOrganizationAsTeamMemberGeneratedDataContract
@@ -5413,7 +5957,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTeamReposGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposDetail: (teamId: number, params: RequestParams = {}) =>
+    reposDetail: (
+      teamId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeTeamReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamReposGeneratedDataContract, void>({
         path: `/teams/${teamId}/repos`,
         method: "GET",
@@ -5429,7 +5976,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposDelete: (teamId: number, owner: string, repo: string, params: RequestParams = {}) =>
+    reposDelete: (
+      teamId: number,
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/teams/${teamId}/repos/${owner}/${repo}`,
         method: "DELETE",
@@ -5445,7 +5997,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @duplicate
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposDetail2: (teamId: number, owner: string, repo: string, params: RequestParams = {}) =>
+    reposDetail2: (
+      teamId: number,
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/teams/${teamId}/repos/${owner}/${repo}`,
         method: "GET",
@@ -5459,7 +6016,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/teams/{teamId}/repos/{owner}/{repo}
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposUpdate: (teamId: number, owner: string, repo: string, params: RequestParams = {}) =>
+    reposUpdate: (
+      teamId: number,
+      owner: string,
+      repo: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/teams/${teamId}/repos/${owner}/${repo}`,
         method: "PUT",
@@ -5475,7 +6037,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUserGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    userList: (params: RequestParams = {}) =>
+    userList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeUserGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserGeneratedDataContract, void>({
         path: `/user`,
         method: "GET",
@@ -5491,7 +6053,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUserGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    userPartialUpdate: (body: SwaggerTypeUserUpdateGeneratedDataContract, params: RequestParams = {}) =>
+    userPartialUpdate: (
+      body: SwaggerTypeUserUpdateGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUserGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserGeneratedDataContract, void>({
         path: `/user`,
         method: "PATCH",
@@ -5509,7 +6074,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    emailsDelete: (body: SwaggerTypeUserEmailsGeneratedDataContract, params: RequestParams = {}) =>
+    emailsDelete: (
+      body: SwaggerTypeUserEmailsGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/emails`,
         method: "DELETE",
@@ -5526,7 +6094,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUserEmailsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    emailsList: (params: RequestParams = {}) =>
+    emailsList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeUserEmailsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserEmailsGeneratedDataContract, void>({
         path: `/user/emails`,
         method: "GET",
@@ -5540,7 +6108,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/user/emails
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    emailsCreate: (body: SwaggerTypeEmailsPostGeneratedDataContract, params: RequestParams = {}) =>
+    emailsCreate: (
+      body: SwaggerTypeEmailsPostGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/user/emails`,
         method: "POST",
@@ -5556,7 +6127,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    followersList: (params: RequestParams = {}) =>
+    followersList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/user/followers`,
         method: "GET",
@@ -5572,7 +6143,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    followingList: (params: RequestParams = {}) =>
+    followingList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/user/following`,
         method: "GET",
@@ -5588,7 +6159,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` User unfollowed.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    followingDelete: (username: string, params: RequestParams = {}) =>
+    followingDelete: (username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/following/${username}`,
         method: "DELETE",
@@ -5604,7 +6175,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` Response if you are not following this user.
      */
-    followingDetail: (username: string, params: RequestParams = {}) =>
+    followingDetail: (username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/following/${username}`,
         method: "GET",
@@ -5619,7 +6190,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` You are now following the user.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    followingUpdate: (username: string, params: RequestParams = {}) =>
+    followingUpdate: (username: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/following/${username}`,
         method: "PUT",
@@ -5644,7 +6215,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         since?: string;
       },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeIssuesGeneratedDataContract, void>> =>
       this.request<SwaggerTypeIssuesGeneratedDataContract, void>({
         path: `/user/issues`,
         method: "GET",
@@ -5661,7 +6232,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGitignoreGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysList: (params: RequestParams = {}) =>
+    keysList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeGitignoreGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitignoreGeneratedDataContract, void>({
         path: `/user/keys`,
         method: "GET",
@@ -5677,7 +6248,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `201` `SwaggerTypeUserKeysKeyIdGeneratedDataContract` Created
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysCreate: (body: SwaggerTypeUserKeysPostGeneratedDataContract, params: RequestParams = {}) =>
+    keysCreate: (
+      body: SwaggerTypeUserKeysPostGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>({
         path: `/user/keys`,
         method: "POST",
@@ -5694,7 +6268,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` No content.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysDelete: (keyId: number, params: RequestParams = {}) =>
+    keysDelete: (keyId: number, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/keys/${keyId}`,
         method: "DELETE",
@@ -5709,7 +6283,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUserKeysKeyIdGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysDetail: (keyId: number, params: RequestParams = {}) =>
+    keysDetail: (
+      keyId: number,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserKeysKeyIdGeneratedDataContract, void>({
         path: `/user/keys/${keyId}`,
         method: "GET",
@@ -5725,7 +6302,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGitignoreGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    orgsList: (params: RequestParams = {}) =>
+    orgsList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeGitignoreGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitignoreGeneratedDataContract, void>({
         path: `/user/orgs`,
         method: "GET",
@@ -5744,7 +6321,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     reposList: (
       query?: { type?: "all" | "public" | "private" | "forks" | "sources" | "member" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReposGeneratedDataContract, void>({
         path: `/user/repos`,
         method: "GET",
@@ -5761,7 +6338,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `201` `SwaggerTypeReposGeneratedDataContract` Created
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    reposCreate: (body: SwaggerTypePostRepoGeneratedDataContract, params: RequestParams = {}) =>
+    reposCreate: (
+      body: SwaggerTypePostRepoGeneratedDataContract,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReposGeneratedDataContract, void>({
         path: `/user/repos`,
         method: "POST",
@@ -5778,7 +6358,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGitignoreGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    starredList: (query?: { direction?: string; sort?: "created" | "updated" }, params: RequestParams = {}) =>
+    starredList: (
+      query?: { direction?: string; sort?: "created" | "updated" },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGitignoreGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitignoreGeneratedDataContract, void>({
         path: `/user/starred`,
         method: "GET",
@@ -5795,7 +6378,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Unstarred.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    starredDelete: (owner: string, repo: string, params: RequestParams = {}) =>
+    starredDelete: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/starred/${owner}/${repo}`,
         method: "DELETE",
@@ -5811,7 +6394,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` This repository is not starred by you.
      */
-    starredDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    starredDetail: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/starred/${owner}/${repo}`,
         method: "GET",
@@ -5826,7 +6409,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Repository starred.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    starredUpdate: (owner: string, repo: string, params: RequestParams = {}) =>
+    starredUpdate: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/starred/${owner}/${repo}`,
         method: "PUT",
@@ -5841,7 +6424,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeReposGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    subscriptionsList: (params: RequestParams = {}) =>
+    subscriptionsList: (
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReposGeneratedDataContract, void>({
         path: `/user/subscriptions`,
         method: "GET",
@@ -5858,7 +6443,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Unwatched.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    subscriptionsDelete: (owner: string, repo: string, params: RequestParams = {}) =>
+    subscriptionsDelete: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/subscriptions/${owner}/${repo}`,
         method: "DELETE",
@@ -5875,7 +6460,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` Repository is not watched by you.
      */
-    subscriptionsDetail: (owner: string, repo: string, params: RequestParams = {}) =>
+    subscriptionsDetail: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/subscriptions/${owner}/${repo}`,
         method: "GET",
@@ -5891,7 +6476,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `204` `void` Repository is watched.
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    subscriptionsUpdate: (owner: string, repo: string, params: RequestParams = {}) =>
+    subscriptionsUpdate: (owner: string, repo: string, params: RequestParams = {}): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/user/subscriptions/${owner}/${repo}`,
         method: "PUT",
@@ -5906,7 +6491,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeTeamsListGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    teamsList: (params: RequestParams = {}) =>
+    teamsList: (params: RequestParams = {}): Promise<HttpResponse<SwaggerTypeTeamsListGeneratedDataContract, void>> =>
       this.request<SwaggerTypeTeamsListGeneratedDataContract, void>({
         path: `/user/teams`,
         method: "GET",
@@ -5923,7 +6508,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    usersList: (query?: { since?: number }, params: RequestParams = {}) =>
+    usersList: (
+      query?: { since?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/users`,
         method: "GET",
@@ -5940,7 +6528,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUserGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    usersDetail: (username: string, params: RequestParams = {}) =>
+    usersDetail: (
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUserGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUserGeneratedDataContract, void>({
         path: `/users/${username}`,
         method: "GET",
@@ -5955,7 +6546,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/events
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    eventsDetail: (username: string, params: RequestParams = {}) =>
+    eventsDetail: (username: string, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/users/${username}/events`,
         method: "GET",
@@ -5969,7 +6560,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/events/orgs/{org}
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    eventsOrgsDetail: (username: string, org: string, params: RequestParams = {}) =>
+    eventsOrgsDetail: (username: string, org: string, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/users/${username}/events/orgs/${org}`,
         method: "GET",
@@ -5984,7 +6575,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeUsersGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    followersDetail: (username: string, params: RequestParams = {}) =>
+    followersDetail: (
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeUsersGeneratedDataContract, void>> =>
       this.request<SwaggerTypeUsersGeneratedDataContract, void>({
         path: `/users/${username}/followers`,
         method: "GET",
@@ -6001,7 +6595,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      * @response `404` `void` Response if user does not follow target user.
      */
-    followingDetail: (username: string, targetUser: string, params: RequestParams = {}) =>
+    followingDetail: (
+      username: string,
+      targetUser: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<void, void>> =>
       this.request<void, void>({
         path: `/users/${username}/following/${targetUser}`,
         method: "GET",
@@ -6016,7 +6614,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGistsGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    gistsDetail: (username: string, query?: { since?: string }, params: RequestParams = {}) =>
+    gistsDetail: (
+      username: string,
+      query?: { since?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGistsGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGistsGeneratedDataContract, void>({
         path: `/users/${username}/gists`,
         method: "GET",
@@ -6033,7 +6635,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGitignoreGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    keysDetail: (username: string, params: RequestParams = {}) =>
+    keysDetail: (
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGitignoreGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitignoreGeneratedDataContract, void>({
         path: `/users/${username}/keys`,
         method: "GET",
@@ -6049,7 +6654,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `200` `SwaggerTypeGitignoreGeneratedDataContract` OK
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    orgsDetail: (username: string, params: RequestParams = {}) =>
+    orgsDetail: (
+      username: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<SwaggerTypeGitignoreGeneratedDataContract, void>> =>
       this.request<SwaggerTypeGitignoreGeneratedDataContract, void>({
         path: `/users/${username}/orgs`,
         method: "GET",
@@ -6064,7 +6672,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/received_events
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    receivedEventsDetail: (username: string, params: RequestParams = {}) =>
+    receivedEventsDetail: (username: string, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/users/${username}/received_events`,
         method: "GET",
@@ -6078,7 +6686,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/received_events/public
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    receivedEventsPublicDetail: (username: string, params: RequestParams = {}) =>
+    receivedEventsPublicDetail: (username: string, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/users/${username}/received_events/public`,
         method: "GET",
@@ -6097,7 +6705,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       username: string,
       query?: { type?: "all" | "public" | "private" | "forks" | "sources" | "member" },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<SwaggerTypeReposGeneratedDataContract, void>> =>
       this.request<SwaggerTypeReposGeneratedDataContract, void>({
         path: `/users/${username}/repos`,
         method: "GET",
@@ -6113,7 +6721,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/starred
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    starredDetail: (username: string, params: RequestParams = {}) =>
+    starredDetail: (username: string, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/users/${username}/starred`,
         method: "GET",
@@ -6127,7 +6735,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/users/{username}/subscriptions
      * @response `403` `void` API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details.
      */
-    subscriptionsDetail: (username: string, params: RequestParams = {}) =>
+    subscriptionsDetail: (username: string, params: RequestParams = {}): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/users/${username}/subscriptions`,
         method: "GET",

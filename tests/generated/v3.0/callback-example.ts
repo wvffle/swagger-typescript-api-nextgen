@@ -228,7 +228,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name StreamsCreate
      * @request POST:/streams
      */
-    streamsCreate: (query: { callbackUrl: string }, params: RequestParams = {}) =>
+    streamsCreate: (
+      query: { callbackUrl: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ subscriptionId: string }, any>> =>
       this.request<{ subscriptionId: string }, any>({
         path: `/streams`,
         method: "POST",

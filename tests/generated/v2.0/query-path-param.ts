@@ -232,7 +232,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List all pets
      * @request GET:/foobarbaz/{query}
      */
-    listPets: (query?: number, queryParams?: { queryParam?: number }, params: RequestParams = {}) =>
+    listPets: (
+      query?: number,
+      queryParams?: { queryParam?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<object, any>> =>
       this.request<object, any>({
         path: `/foobarbaz/${query}`,
         method: "GET",

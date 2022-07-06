@@ -327,7 +327,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeyRevokeNosecret
      * @request DELETE:/key
      */
-    keyRevokeNosecret: (query: KeyRevokeNosecretParams, params: RequestParams = {}) =>
+    keyRevokeNosecret: (
+      query: KeyRevokeNosecretParams,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key`,
         method: "DELETE",
@@ -343,7 +346,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeyRegister
      * @request POST:/key
      */
-    keyRegister: (body: AuthentiqID, params: RequestParams = {}) =>
+    keyRegister: (
+      body: AuthentiqID,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ secret?: string; status?: string }, Error>> =>
       this.request<{ secret?: string; status?: string }, Error>({
         path: `/key`,
         method: "POST",
@@ -358,7 +364,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeyRevoke
      * @request DELETE:/key/{bar-baz}/{PK}
      */
-    keyRevoke: ({ barBaz, pk, ...query }: KeyRevokeParams, params: RequestParams = {}) =>
+    keyRevoke: (
+      { barBaz, pk, ...query }: KeyRevokeParams,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/key/${barBaz}/${pk}`,
         method: "DELETE",
@@ -375,7 +384,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @originalName keyRevoke
      * @duplicate
      */
-    keyRevoke2: ({ pk, ...query }: KeyRevoke2Params, params: RequestParams = {}) =>
+    keyRevoke2: (
+      { pk, ...query }: KeyRevoke2Params,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key/${pk}`,
         method: "DELETE",
@@ -391,7 +403,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name GetKey
      * @request GET:/key/{PK}
      */
-    getKey: (pk: string, params: RequestParams = {}) =>
+    getKey: (
+      pk: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ since?: string; status?: string; sub?: string }, Error>> =>
       this.request<{ since?: string; status?: string; sub?: string }, Error>({
         path: `/key/${pk}`,
         method: "GET",
@@ -406,7 +421,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name HeadKey
      * @request HEAD:/key/{PK}
      */
-    headKey: (pk: string, params: RequestParams = {}) =>
+    headKey: (pk: string, params: RequestParams = {}): Promise<HttpResponse<void, Error>> =>
       this.request<void, Error>({
         path: `/key/${pk}`,
         method: "HEAD",
@@ -420,7 +435,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeyUpdate
      * @request POST:/key/{PK}
      */
-    keyUpdate: (pk: string, body: AuthentiqID, params: RequestParams = {}) =>
+    keyUpdate: (
+      pk: string,
+      body: AuthentiqID,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key/${pk}`,
         method: "POST",
@@ -436,7 +455,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name KeyBind
      * @request PUT:/key/{PK}
      */
-    keyBind: (pk: string, body: AuthentiqID, params: RequestParams = {}) =>
+    keyBind: (
+      pk: string,
+      body: AuthentiqID,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key/${pk}`,
         method: "PUT",
@@ -453,7 +476,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PushLoginRequest
      * @request POST:/login
      */
-    pushLoginRequest: (query: PushLoginRequestParams, body: PushToken, params: RequestParams = {}) =>
+    pushLoginRequest: (
+      query: PushLoginRequestParams,
+      body: PushToken,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/login`,
         method: "POST",
@@ -471,7 +498,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SignRequest
      * @request POST:/scope
      */
-    signRequest: (query: SignRequestParams, body: Claims, params: RequestParams = {}) =>
+    signRequest: (
+      query: SignRequestParams,
+      body: Claims,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ job?: string; status?: string }, Error>> =>
       this.request<{ job?: string; status?: string }, Error>({
         path: `/scope`,
         method: "POST",
@@ -488,7 +519,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SignDelete
      * @request DELETE:/scope/{job}
      */
-    signDelete: (job: string, params: RequestParams = {}) =>
+    signDelete: (job: string, params: RequestParams = {}): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/scope/${job}`,
         method: "DELETE",
@@ -503,7 +534,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SignRetrieve
      * @request GET:/scope/{job}
      */
-    signRetrieve: (job: string, params: RequestParams = {}) =>
+    signRetrieve: (
+      job: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ exp?: number; field?: string; sub?: string }, Error>> =>
       this.request<{ exp?: number; field?: string; sub?: string }, Error>({
         path: `/scope/${job}`,
         method: "GET",
@@ -518,7 +552,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SignRetrieveHead
      * @request HEAD:/scope/{job}
      */
-    signRetrieveHead: (job: string, params: RequestParams = {}) =>
+    signRetrieveHead: (job: string, params: RequestParams = {}): Promise<HttpResponse<void, Error>> =>
       this.request<void, Error>({
         path: `/scope/${job}`,
         method: "HEAD",
@@ -532,7 +566,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SignConfirm
      * @request POST:/scope/{job}
      */
-    signConfirm: (job: string, params: RequestParams = {}) =>
+    signConfirm: (job: string, params: RequestParams = {}): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/scope/${job}`,
         method: "POST",
@@ -548,7 +582,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name SignUpdate
      * @request PUT:/scope/{job}
      */
-    signUpdate: (job: string, params: RequestParams = {}) =>
+    signUpdate: (
+      job: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ jwt?: string; status?: string }, Error>> =>
       this.request<{ jwt?: string; status?: string }, Error>({
         path: `/scope/${job}`,
         method: "PUT",

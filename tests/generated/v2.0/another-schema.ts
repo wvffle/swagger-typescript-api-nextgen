@@ -251,7 +251,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FooGetBarDescriptions
      * @request GET:/api/Foo/GetBarDescriptions
      */
-    fooGetBarDescriptions: (params: RequestParams = {}) =>
+    fooGetBarDescriptions: (params: RequestParams = {}): Promise<HttpResponse<string[] | null, any>> =>
       this.request<string[] | null, any>({
         path: `/api/Foo/GetBarDescriptions`,
         method: "GET",
@@ -266,7 +266,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FooGetBar
      * @request GET:/api/Foo/GetBar
      */
-    fooGetBar: (query: { id: number }, params: RequestParams = {}) =>
+    fooGetBar: (query: { id: number }, params: RequestParams = {}): Promise<HttpResponse<Bar | null, any>> =>
       this.request<Bar | null, any>({
         path: `/api/Foo/GetBar`,
         method: "GET",
@@ -282,7 +282,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FooSetBar
      * @request POST:/api/Foo/SetBar
      */
-    fooSetBar: (value: Bar | null, params: RequestParams = {}) =>
+    fooSetBar: (value: Bar | null, params: RequestParams = {}): Promise<HttpResponse<void, any>> =>
       this.request<void, any>({
         path: `/api/Foo/SetBar`,
         method: "POST",

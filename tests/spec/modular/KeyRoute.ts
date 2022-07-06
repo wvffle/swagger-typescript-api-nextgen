@@ -8,7 +8,7 @@
  * ------------------------------------------------------------------
  */
 
-import { AuthentiqID } from "./data-contracts";
+import type { AuthentiqID } from "./data-contracts";
 
 export namespace Key {
   /**

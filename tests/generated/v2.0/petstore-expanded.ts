@@ -271,7 +271,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name PathParamFooBarBazList
      * @request GET:/path-params/{path-param}/{foo-bar-baz}
      */
-    pathParamFooBarBazList: (pathParam: string, fooBarBaz: string, params: RequestParams = {}) =>
+    pathParamFooBarBazList: (
+      pathParam: string,
+      fooBarBaz: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<any, void>> =>
       this.request<any, void>({
         path: `/path-params/${pathParam}/${fooBarBaz}`,
         method: "GET",
@@ -285,7 +289,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FindPets
      * @request GET:/pets
      */
-    findPets: (query?: { tags?: string[]; limit?: number }, params: RequestParams = {}) =>
+    findPets: (
+      query?: { tags?: string[]; limit?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<Pet[], Error>> =>
       this.request<Pet[], Error>({
         path: `/pets`,
         method: "GET",
@@ -300,7 +307,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name AddPet
      * @request POST:/pets
      */
-    addPet: (pet: NewPet, params: RequestParams = {}) =>
+    addPet: (pet: NewPet, params: RequestParams = {}): Promise<HttpResponse<Pet, Error>> =>
       this.request<Pet, Error>({
         path: `/pets`,
         method: "POST",
@@ -316,7 +323,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FindPetById
      * @request GET:/pets/{id}
      */
-    findPetById: (id: number, params: RequestParams = {}) =>
+    findPetById: (id: number, params: RequestParams = {}): Promise<HttpResponse<Pet, Error>> =>
       this.request<Pet, Error>({
         path: `/pets/${id}`,
         method: "GET",
@@ -330,7 +337,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name DeletePet
      * @request DELETE:/pets/{id}
      */
-    deletePet: (id: number, params: RequestParams = {}) =>
+    deletePet: (id: number, params: RequestParams = {}): Promise<HttpResponse<void, Error>> =>
       this.request<void, Error>({
         path: `/pets/${id}`,
         method: "DELETE",

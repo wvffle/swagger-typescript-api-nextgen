@@ -8,7 +8,7 @@
  * ------------------------------------------------------------------
  */
 
-import { PushToken } from "./data-contracts";
+import type { PushToken } from "./data-contracts";
 
 export namespace Login {
   /**

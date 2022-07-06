@@ -292,7 +292,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `409` `Error` Confirm with code sent `confirm-first`
      * @response `default` `Error`
      */
-    keyRevokeNosecret: (query: { email: string; phone: string; code?: string }, params: RequestParams = {}) =>
+    keyRevokeNosecret: (
+      query: { email: string; phone: string; code?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key`,
         method: "DELETE",
@@ -311,7 +314,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `409` `Error` Key already registered `duplicate-key`
      * @response `default` `Error`
      */
-    keyRegister: (body: AuthentiqID, params: RequestParams = {}) =>
+    keyRegister: (
+      body: AuthentiqID,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ secret?: string; status?: string }, Error>> =>
       this.request<{ secret?: string; status?: string }, Error>({
         path: `/key`,
         method: "POST",
@@ -331,7 +337,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `Error` Unknown key `unknown-key`
      * @response `default` `Error`
      */
-    keyRevoke: (pk: string, query: { secret: string }, params: RequestParams = {}) =>
+    keyRevoke: (
+      pk: string,
+      query: { secret: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key/${pk}`,
         method: "DELETE",
@@ -351,7 +361,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `410` `Error` Key is revoked (gone). `revoked-key`
      * @response `default` `Error`
      */
-    getKey: (pk: string, params: RequestParams = {}) =>
+    getKey: (
+      pk: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ since?: string; status?: string; sub?: string }, Error>> =>
       this.request<{ since?: string; status?: string; sub?: string }, Error>({
         path: `/key/${pk}`,
         method: "GET",
@@ -370,7 +383,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `410` `Error` Key is revoked `revoked-key`
      * @response `default` `Error`
      */
-    headKey: (pk: string, params: RequestParams = {}) =>
+    headKey: (pk: string, params: RequestParams = {}): Promise<HttpResponse<void, Error>> =>
       this.request<void, Error>({
         path: `/key/${pk}`,
         method: "HEAD",
@@ -387,7 +400,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `Error` Unknown key `unknown-key`
      * @response `default` `Error`
      */
-    keyUpdate: (pk: string, body: AuthentiqID, params: RequestParams = {}) =>
+    keyUpdate: (
+      pk: string,
+      body: AuthentiqID,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key/${pk}`,
         method: "POST",
@@ -407,7 +424,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `409` `Error` Already bound to another key `duplicate-hash`
      * @response `default` `Error`
      */
-    keyBind: (pk: string, body: AuthentiqID, params: RequestParams = {}) =>
+    keyBind: (
+      pk: string,
+      body: AuthentiqID,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/key/${pk}`,
         method: "PUT",
@@ -427,7 +448,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `Error` Unauthorized for this callback audience `aud-error` or JWT should be self-signed `auth-error`
      * @response `default` `Error`
      */
-    pushLoginRequest: (query: { callback: string }, body: PushToken, params: RequestParams = {}) =>
+    pushLoginRequest: (
+      query: { callback: string },
+      body: PushToken,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/login`,
         method: "POST",
@@ -448,7 +473,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `429` `Error` Too Many Requests on same address / number `rate-limit`
      * @response `default` `Error`
      */
-    signRequest: (body: Claims, query?: { test?: number }, params: RequestParams = {}) =>
+    signRequest: (
+      body: Claims,
+      query?: { test?: number },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ job?: string; status?: string }, Error>> =>
       this.request<{ job?: string; status?: string }, Error>({
         path: `/scope`,
         method: "POST",
@@ -468,7 +497,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `Error` Job not found `unknown-job`
      * @response `default` `Error`
      */
-    signDelete: (job: string, params: RequestParams = {}) =>
+    signDelete: (job: string, params: RequestParams = {}): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/scope/${job}`,
         method: "DELETE",
@@ -487,7 +516,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `Error` Job not found `unknown-job`
      * @response `default` `Error`
      */
-    signRetrieve: (job: string, params: RequestParams = {}) =>
+    signRetrieve: (
+      job: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ exp?: number; field?: string; sub?: string }, Error>> =>
       this.request<{ exp?: number; field?: string; sub?: string }, Error>({
         path: `/scope/${job}`,
         method: "GET",
@@ -506,7 +538,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `Error` Job not found `unknown-job`
      * @response `default` `Error`
      */
-    signRetrieveHead: (job: string, params: RequestParams = {}) =>
+    signRetrieveHead: (job: string, params: RequestParams = {}): Promise<HttpResponse<void, Error>> =>
       this.request<void, Error>({
         path: `/scope/${job}`,
         method: "HEAD",
@@ -525,7 +557,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `405` `Error` JWT POSTed to scope `not-supported`
      * @response `default` `Error`
      */
-    signConfirm: (job: string, params: RequestParams = {}) =>
+    signConfirm: (job: string, params: RequestParams = {}): Promise<HttpResponse<{ status?: string }, Error>> =>
       this.request<{ status?: string }, Error>({
         path: `/scope/${job}`,
         method: "POST",
@@ -545,7 +577,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `409` `Error` Job not confirmed yet `confirm-first`
      * @response `default` `Error`
      */
-    signUpdate: (job: string, params: RequestParams = {}) =>
+    signUpdate: (
+      job: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ jwt?: string; status?: string }, Error>> =>
       this.request<{ jwt?: string; status?: string }, Error>({
         path: `/scope/${job}`,
         method: "PUT",

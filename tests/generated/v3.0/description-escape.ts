@@ -243,7 +243,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name FooBar
      * @request POST:/foobar
      */
-    fooBar: (query: { q: string }, data: { id?: string; name?: string }, params: RequestParams = {}) =>
+    fooBar: (
+      query: { q: string },
+      data: { id?: string; name?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ id?: string; name?: string }, any>> =>
       this.request<{ id?: string; name?: string }, any>({
         path: `/foobar`,
         method: "POST",

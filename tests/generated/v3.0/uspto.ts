@@ -250,7 +250,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @summary List available data sets
    * @request GET:/
    */
-  listDataSets = (params: RequestParams = {}) =>
+  listDataSets = (params: RequestParams = {}): Promise<HttpResponse<DataSetList, any>> =>
     this.request<DataSetList, any>({
       path: `/`,
       method: "GET",
@@ -267,7 +267,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Provides the general information about the API and the list of fields that can be used to query the dataset.
      * @request GET:/{dataset}/{version}/fields
      */
-    listSearchableFields: (dataset: string, version: string, params: RequestParams = {}) =>
+    listSearchableFields: (
+      dataset: string,
+      version: string,
+      params: RequestParams = {},
+    ): Promise<HttpResponse<string, string>> =>
       this.request<string, string>({
         path: `/${dataset}/${version}/fields`,
         method: "GET",
@@ -288,7 +292,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       dataset: string,
       data: { criteria: string; start?: number; rows?: number },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<Record<string, object>[], void>> =>
       this.request<Record<string, object>[], void>({
         path: `/${dataset}/${version}/records`,
         method: "POST",

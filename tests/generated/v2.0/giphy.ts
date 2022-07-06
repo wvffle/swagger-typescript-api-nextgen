@@ -31,10 +31,7 @@ export interface Gif {
    */
   embded_url?: string;
 
-  /**
-   * An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
-   *
-   */
+  /** An array of featured tags for this GIF (Note: Not available when using the Public Beta Key) */
   featured_tags?: string[];
 
   /**
@@ -104,10 +101,7 @@ export interface Gif {
    */
   source_tld?: string;
 
-  /**
-   * An array of tags for this GIF (Note: Not available when using the Public Beta Key)
-   *
-   */
+  /** An array of tags for this GIF (Note: Not available when using the Public Beta Key) */
   tags?: string[];
 
   /**
@@ -519,7 +513,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs
      * @secure
      */
-    getGifsById: (query?: { ids?: string }, params: RequestParams = {}) =>
+    getGifsById: (
+      query?: { ids?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>> =>
       this.request<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>({
         path: `/gifs`,
         method: "GET",
@@ -538,7 +535,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/random
      * @secure
      */
-    randomGif: (query?: { tag?: string; rating?: string }, params: RequestParams = {}) =>
+    randomGif: (
+      query?: { tag?: string; rating?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ data?: Gif; meta?: Meta }, any>> =>
       this.request<{ data?: Gif; meta?: Meta }, any>({
         path: `/gifs/random`,
         method: "GET",
@@ -560,7 +560,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     searchGifs: (
       query: { q: string; limit?: number; offset?: number; rating?: string; lang?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>> =>
       this.request<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>({
         path: `/gifs/search`,
         method: "GET",
@@ -579,7 +579,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/translate
      * @secure
      */
-    translateGif: (query: { s: string }, params: RequestParams = {}) =>
+    translateGif: (
+      query: { s: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ data?: Gif; meta?: Meta }, any>> =>
       this.request<{ data?: Gif; meta?: Meta }, any>({
         path: `/gifs/translate`,
         method: "GET",
@@ -598,7 +601,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/trending
      * @secure
      */
-    trendingGifs: (query?: { limit?: number; offset?: number; rating?: string }, params: RequestParams = {}) =>
+    trendingGifs: (
+      query?: { limit?: number; offset?: number; rating?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>> =>
       this.request<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>({
         path: `/gifs/trending`,
         method: "GET",
@@ -617,7 +623,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/gifs/{gifId}
      * @secure
      */
-    getGifById: (gifId: number, params: RequestParams = {}) =>
+    getGifById: (gifId: number, params: RequestParams = {}): Promise<HttpResponse<{ data?: Gif; meta?: Meta }, any>> =>
       this.request<{ data?: Gif; meta?: Meta }, any>({
         path: `/gifs/${gifId}`,
         method: "GET",
@@ -636,7 +642,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/stickers/random
      * @secure
      */
-    randomSticker: (query?: { tag?: string; rating?: string }, params: RequestParams = {}) =>
+    randomSticker: (
+      query?: { tag?: string; rating?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ data?: Gif; meta?: Meta }, any>> =>
       this.request<{ data?: Gif; meta?: Meta }, any>({
         path: `/stickers/random`,
         method: "GET",
@@ -658,7 +667,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     searchStickers: (
       query: { q: string; limit?: number; offset?: number; rating?: string; lang?: string },
       params: RequestParams = {},
-    ) =>
+    ): Promise<HttpResponse<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>> =>
       this.request<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>({
         path: `/stickers/search`,
         method: "GET",
@@ -677,7 +686,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/stickers/translate
      * @secure
      */
-    translateSticker: (query: { s: string }, params: RequestParams = {}) =>
+    translateSticker: (
+      query: { s: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ data?: Gif; meta?: Meta }, any>> =>
       this.request<{ data?: Gif; meta?: Meta }, any>({
         path: `/stickers/translate`,
         method: "GET",
@@ -696,7 +708,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/stickers/trending
      * @secure
      */
-    trendingStickers: (query?: { limit?: number; offset?: number; rating?: string }, params: RequestParams = {}) =>
+    trendingStickers: (
+      query?: { limit?: number; offset?: number; rating?: string },
+      params: RequestParams = {},
+    ): Promise<HttpResponse<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>> =>
       this.request<{ data?: Gif[]; meta?: Meta; pagination?: Pagination }, any>({
         path: `/stickers/trending`,
         method: "GET",
