@@ -38,7 +38,8 @@ Any questions you can ask [**here**](https://github.com/grandsilence/swagger-typ
   - Fix: problem with missing HttpResponse type with --to-js option
   - Fix: unable to cancel fetch request with AbortSignal (#329)
   - Fix: escape `*/` in description text
-  - Fix: always specify return-type of api-calls
+  - Fix: always specify return-type of 
+  - Fix: null enums, that contain only a single null value
 
 ## 👀 Examples  
 
