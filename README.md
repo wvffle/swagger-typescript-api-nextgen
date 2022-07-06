@@ -37,6 +37,8 @@ Any questions you can ask [**here**](https://github.com/grandsilence/swagger-typ
   - Fix: missing extractRequestBody field in type
   - Fix: problem with missing HttpResponse type with --to-js option
   - Fix: unable to cancel fetch request with AbortSignal (#329)
+  - Fix: escape `*/` in description text
+  - Fix: always specify return-type of api-calls
 
 ## 👀 Examples  
 
