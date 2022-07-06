@@ -41,6 +41,7 @@ Any questions you can ask [**here**](https://github.com/wvffle/swagger-typescrip
   - Fix: escape `*/` in description text ([grandsilence/swagger-typescript-api-nextgen#4](https://github.com/grandsilence/swagger-typescript-api-nextgen/issues/4))
   - Fix: always specify return-type of api calls ([grandsilence/swagger-typescript-api-nextgen#5](https://github.com/grandsilence/swagger-typescript-api-nextgen/issues/5))
   - Fix: null enums, that contain only a single null value ([grandsilence/swagger-typescript-api-nextgen#6](https://github.com/grandsilence/swagger-typescript-api-nextgen/issues/6))
+  - Fix: type imports ([grandsilence/swagger-typescript-api-next typegen#7](https://github.com/grandsilence/swagger-typescript-api-nextgen/issues/7))
 
 ## 👀 Examples  
 
