@@ -32,6 +32,7 @@ Any questions you can ask [**here**](https://github.com/grandsilence/swagger-typ
   - Feature: load prettier config from your project by default (#286)
   - Feature: allow passing "patch" option to "swagger2openapi" (#283)
   - Feature: support for readOnly properties (#304)
+  - Feature: add gitpod support
   - Fix: missing `title` of object type (#303)
   - Fix: reject and exit with code 1 if error (#295)
   - Fix: missing extractRequestBody field in type
