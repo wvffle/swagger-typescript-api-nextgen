@@ -8,10 +8,18 @@
  * ------------------------------------------------------------------
  */
 
-export type ContentCategoryEnum = "music" | "podcast" | "other";
+export enum ContentCategoryEnum {
+  Music = "music",
+  Podcast = "podcast",
+  Other = "other",
+}
 
 export type NullEnum = null;
 
 export interface ManageArtist {
   content_category?: ContentCategoryEnum | NullEnum | null;
+}
+
+export interface ManageAlbum {
+  content_category?: "music" | "podcast" | "other" | null;
 }

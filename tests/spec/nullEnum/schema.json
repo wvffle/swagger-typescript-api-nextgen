@@ -28,6 +28,23 @@
             ]
           }
         }
+      },
+      "ManageAlbum": {
+        "type": "object",
+        "properties": {
+          "content_category": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "enum": ["music", "podcast", "other"],
+                "type": "string"
+              },
+              {
+                "enum": [null]
+              }
+            ]
+          }
+        }
       }
     }
   }

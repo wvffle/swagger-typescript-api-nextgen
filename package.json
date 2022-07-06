@@ -18,6 +18,7 @@
     "generate:debug": "node --nolazy tests/generate.js",
     "validate": "node tests/validate.js",
     "validate:debug": "node --nolazy tests/validate.js",
+    "test:--null-enum": "node tests/spec/nullEnum/test.js",
     "test:--route-types": "node tests/spec/routeTypes/test.js",
     "test:--no-client": "node tests/spec/noClient/test.js",
     "test:--default-as-success": "node tests/spec/defaultAsSuccess/test.js",

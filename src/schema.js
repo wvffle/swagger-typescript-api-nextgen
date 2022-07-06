@@ -238,7 +238,8 @@ const schemaParsers = {
     const keyType = getType(schema);
     const enumNames = getEnumNames(schema);
     const isIntegerOrBooleanEnum = keyType === types.number || keyType === types.boolean;
-    const isNullEnum = keyType === types.object && schema.enum.length === 1 && schema.enum[0] === null;
+    const isNullEnum =
+      keyType === types.object && schema.enum.length === 1 && schema.enum[0] === null && typeName !== null;
     let content = null;
 
     if (isNullEnum) {
@@ -293,9 +294,7 @@ const schemaParsers = {
       type: SCHEMA_TYPES.ENUM,
       keyType: keyType,
       typeIdentifier:
-        config.generateUnionEnums || (!enumNames && isIntegerOrBooleanEnum) || isNullEnum
-          ? TS_KEYWORDS.TYPE
-          : TS_KEYWORDS.ENUM,
+        config.generateUnionEnums || (!enumNames && isIntegerOrBooleanEnum) ? TS_KEYWORDS.TYPE : TS_KEYWORDS.ENUM,
       name: typeName,
       description: formatDescription(schema.description),
       content,

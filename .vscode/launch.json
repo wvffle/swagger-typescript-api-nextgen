@@ -83,6 +83,14 @@
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run-script", "test:--type-suffix--type-prefix"]
+    },
+    {
+      "name": "Debug test:--null-enum",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "test:--null-enum"]
     }
   ]
 }
